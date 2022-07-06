@@ -1,0 +1,46 @@
+.navbar-container {
+    margin-top: 1rem;
+    height: 100vh;
+
+}
+
+
+.sidebar-nav-links {
+    list-style-type: none;
+    letter-spacing: 2px;
+    font-size: var(--large-font-size);
+}
+
+.sidebar-nav-link {
+    padding: 1rem;
+}
+
+.sidebar-nav-icon {
+    margin-right: 1rem;
+}
+
+.logo-icon {
+    width: 4rem;
+    height: 4rem;
+    margin-left: 4rem;
+}
+
+.navbar-btn {
+    background-color: var(--primary-color);
+    width: 10rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    border: none;
+    margin-left: 3rem;
+    font-size: var(--medium-font-size);
+    color: var(--secondary-color);
+}
+
+.navbar-vl {
+    border-left:  solid #D3D3D3;
+    border-width: thin;
+    height: 100vh;
+    position: absolute;
+    left: 25vw;
+    top: 0;
+  }

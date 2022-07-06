@@ -1,0 +1,40 @@
+textarea {
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 1.5rem;
+    width: 85%;
+}
+.image-container {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+.post-container{
+    display: inline-block;
+}
+
+.postfeed-vl {
+    border-left:  solid #D3D3D3;
+    border-width: thin;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+  }
+
+  
+.share-btn {
+    background-color: var(--primary-color);
+    width: 5rem;
+    height: 2rem;
+    float: right;
+    margin-right: 1rem;
+    border: none;
+    border-radius: 1rem;
+    color: var(--secondary-color);
+}
