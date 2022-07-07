@@ -5,7 +5,7 @@ import { useState } from 'react';
 export const NavBar = () => {
     const [postModal,setPostModal] = useState(false);
     function openPostModal() {
-        setPostModal(true);
+        setPostModal(!postModal);
     }
     return(<div class="navbar-container">
         <div class="logo"><img src={logo} class="logo-icon"/></div>
@@ -16,7 +16,7 @@ export const NavBar = () => {
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i>Profile</li>
         </ul>
         <button class="navbar-btn" onClick={openPostModal}>Think & Share</button>
-        {postModal && <PostModal></PostModal>}
+        {postModal && <PostModal modalOpen={setPostModal}></PostModal>}
         <div class="navbar-vl"></div>
         </div>
     )

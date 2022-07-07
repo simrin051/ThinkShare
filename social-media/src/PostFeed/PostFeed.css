@@ -9,18 +9,20 @@ textarea {
     margin-bottom: 1.5rem;
     width: 85%;
 }
+
 .image-container {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
     margin-left: 5px;
 }
-.post-container{
+
+.post-container {
     display: inline-block;
-    border-left:  solid #D3D3D3;
+    border-left: solid #D3D3D3;
     border-width: thin;
 }
- 
+
 .share-btn {
     background-color: var(--primary-color);
     width: 5rem;
@@ -31,3 +33,4 @@ textarea {
     border-radius: 1rem;
     color: var(--secondary-color);
 }
+
