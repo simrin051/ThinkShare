@@ -12,6 +12,7 @@ import {
     ModalCloseButton,
 } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/react'
+import { Link } from 'react-router-dom';
 
 
 export const NavBar = () => {
@@ -27,7 +28,7 @@ export const NavBar = () => {
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-house"></i>Home</li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-hashtag"></i>Explore</li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-bookmark"></i>BookMarks</li>
-            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i>Profile</li>
+            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i><Link to="/profile">Profile</Link></li>
         </ul>
         <button class="navbar-btn" onClick={openPostModal}>Think & Share</button>
         <Modal isOpen={isOpen} onClose={onClose}>
