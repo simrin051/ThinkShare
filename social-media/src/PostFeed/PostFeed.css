@@ -17,17 +17,10 @@ textarea {
 }
 .post-container{
     display: inline-block;
-}
-
-.postfeed-vl {
     border-left:  solid #D3D3D3;
     border-width: thin;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-  }
-
-  
+}
+ 
 .share-btn {
     background-color: var(--primary-color);
     width: 5rem;
