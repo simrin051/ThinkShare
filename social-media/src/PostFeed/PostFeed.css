@@ -5,16 +5,15 @@ textarea {
     resize: none;
     outline: none;
     display: inline-block;
-    margin-left: 5px;
-    margin-bottom: 1.5rem;
     width: 85%;
 }
 
 .image-container {
-    width: 4rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
-    margin-left: 5px;
+    padding: 10px;
+    display: inline-block;
 }
 
 .post-container {
