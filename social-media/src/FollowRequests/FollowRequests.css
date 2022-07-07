@@ -26,4 +26,7 @@
     height: 2rem;
     float: right;
     margin-left: 7rem;
+    background-color: black;
+    color: white;
+    border-radius: 1rem;
 }
