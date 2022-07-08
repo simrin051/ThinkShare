@@ -6,14 +6,16 @@
 }
 
 .follow-btn {
+  display: flex;
+  align-items: center;
+  background-color: black;
   height: 2rem;
-  float: right;
   margin-top: 5px;
   margin-left: 7rem;
-  background-color: black;
-  color: white;
-  border-radius: 1rem;
-  padding: 1em 1em;
   margin-right: 1em;
+  border-radius: 1rem;
+  float: right;
+  padding: 1em 0.5em;
+  color: #fff;
+  line-height: initial;
 }
-

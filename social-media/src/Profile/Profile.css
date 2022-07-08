@@ -37,11 +37,3 @@
 .fr {
     float: right;
 }
-
-button {
-    display: flex;
-    align-items: center;
-    padding: 1em 0.5em;
-    color: #fff;
-    line-height: initial;
-}
