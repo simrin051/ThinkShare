@@ -1,8 +1,14 @@
+import { NavBar } from '../NavBar/NavBar';
+import { FollowRequests } from '../FollowRequests/FollowRequests';
 import './Profile.css';
 export const Profile = () => {
-    console.log("inside profile component");
-    return(<div class="profile-container">
-        <div class="profile-img">
+    return(<div class="profile-container"><NavBar/>
+    <div class="profile-body">
+        <div class="profile-img-container">
+            <div class="profile-img-background"></div>
+            <div class="profile-img">
+                <img  src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg"/>
+            </div>
         </div>
         <button>Follow</button>
         <div class="profile-details">
@@ -13,5 +19,5 @@ export const Profile = () => {
             <div class="followers">0 Followers</div>
             <div class="following">0 Following</div>
         </div>       
-    </div>)
+    </div><FollowRequests/></div>)
 }
