@@ -26,7 +26,7 @@
 
 .profile-img img {
     width: 8rem;
-   border-radius: 50%;
+    border-radius: 50%;
     z-index: 1;
     height: 8rem;
     position: absolute;
@@ -36,4 +36,36 @@
 
 .fr {
     float: right;
+}
+
+.profile-details .username {
+    font-weight: bold;
+}
+
+.profile-details  .userbio {
+    margin-top: 1rem;
+}
+
+.profile-details .userbiolink a{
+    margin-left: 0.5rem;
+}
+
+.profile-details .userbiolink a {
+    color: var(--primary-color);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+  
+.profile-details .profile-follow-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.profile-details  {
+    font-size: 1em;
+    margin-left: 10px;
 }
