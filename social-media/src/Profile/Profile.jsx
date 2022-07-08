@@ -9,8 +9,8 @@ export const Profile = () => {
             <div class="profile-img">
                 <img  src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg"/>
             </div>
+            <button class="fr mt-2 p-2 follow-btn">Follow</button>
         </div>
-        <button>Follow</button>
         <div class="profile-details">
             <div>Master Shi Heng</div>
             <div>@mastershi</div>

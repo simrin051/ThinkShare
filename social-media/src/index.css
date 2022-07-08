@@ -5,3 +5,15 @@
   --large-font-size: 1.5em;
 }
 
+.follow-btn {
+  height: 2rem;
+  float: right;
+  margin-top: 5px;
+  margin-left: 7rem;
+  background-color: black;
+  color: white;
+  border-radius: 1rem;
+  padding: 1em 1em;
+  margin-right: 1em;
+}
+
