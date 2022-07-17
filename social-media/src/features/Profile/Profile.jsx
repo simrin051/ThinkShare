@@ -1,4 +1,4 @@
-import { NavBar } from '../NavBar/NavBar';
+import { NavBar } from '../../NavBar/NavBar';
 import { FollowRequests } from '../FollowRequests/FollowRequests';
 import './Profile.css';
 export const Profile = () => {

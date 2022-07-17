@@ -1,6 +1,6 @@
-import { FollowRequests } from '../FollowRequests/FollowRequests';
+import { FollowRequests } from '../features/FollowRequests/FollowRequests';
 import { NavBar } from '../NavBar/NavBar';
-import { PostFeed } from '../PostFeed/PostFeed';
+import { PostFeed } from '../features/PostFeed/PostFeed';
 import './Home.css';
 export const Home = () => {return (
     <div class="home-container"><NavBar/><PostFeed/><FollowRequests/></div>)

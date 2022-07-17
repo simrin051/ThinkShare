@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Home } from './Home/Home';
-import { Profile} from './Profile/Profile';
+import { Profile} from './features/Profile/Profile';
 
 function App() {
   return (
