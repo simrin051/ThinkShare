@@ -1,5 +1,5 @@
 import './NavBar.css';
-import logo from '../assets/logo.jpg';
+import logo from '../../assets/logo.jpg';
 import { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import {
@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
-import  {createPost}  from '../features/PostFeed/postSlice';
+import  {createPost}  from '../PostFeed/postSlice';
 
 export const NavBar = () => {
     const [postModal, setPostModal] = useState(false);

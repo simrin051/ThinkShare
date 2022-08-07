@@ -1,5 +1,5 @@
-import './NavBar.css';
-import '../Home/Home.css';
+import '../NavBar.css';
+import './Home/Home.css';
 import { useDisclosure } from '@chakra-ui/react';
 import {
     Modal,
