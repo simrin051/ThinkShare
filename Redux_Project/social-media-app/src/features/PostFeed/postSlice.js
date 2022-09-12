@@ -13,11 +13,11 @@ const fetchPostById = createAsyncThunk(
 )
 
 export const createPost = createAsyncThunk(
-    "posts/createPost",
-    async (postContent) => {
+    "api/user/posts",
+    async ({post}) => {
         console.log("inside create post ");
         try {
-            const response = await axios.post(API_URL, postContent);
+            const response = await axios.post(API_URL,{postData: post});
             console.log("res status "+response.status);
             return response.data;
         } catch (err) {
@@ -78,4 +78,4 @@ const postSlice = createSlice({
     }
 });
 const { actions, reducer } = postSlice;
-export default postSlice;
+export const  postSliceReducer =  reducer;

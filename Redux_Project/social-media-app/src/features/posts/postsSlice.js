@@ -15,4 +15,4 @@ const postsSlice = createSlice({
 })
 
 export const { postAdded } = postsSlice.actions
-export default postsSlice.reducer
+export const postsSliceReducer = postsSlice.reducer;

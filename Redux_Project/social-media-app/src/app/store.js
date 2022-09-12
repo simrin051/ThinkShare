@@ -1,8 +1,10 @@
-import postsReducer from '../features/posts/postsSlice'
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import  {postSliceReducer } from '../features/PostFeed/postSlice';
+import  {postsSliceReducer } from '../features/posts/postsSlice';
 
 export const store =  configureStore({
   reducer: {
-    posts: postsReducer
+    postSliceReducer,
+    postsSliceReducer
   }
-})
+});

@@ -1,6 +1,6 @@
 import './NavBar.css';
 import logo from '../../assets/logo.jpg';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import {
     Modal,
@@ -14,19 +14,30 @@ import {
 import { Button } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 import  {createPost}  from '../PostFeed/postSlice';
+import {useDispatch} from 'react-redux';
+import { ACTIONS } from '../posts/reducer/createPostFormReducer';
+import {postsReducer} from  '../posts/reducer/createPostFormReducer';
+import {initialStateOfPostForm} from  '../posts/reducer/createPostFormReducer';
 
 export const NavBar = () => {
+    const {SET_CONTENT}  = ACTIONS;
     const [postModal, setPostModal] = useState(false);
-    const [postContent, setPostContent] = useState("");
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const dispatch = useDispatch();
+    const [formState, formDispatch] = useReducer(
+		postsReducer,
+		initialStateOfPostForm,
+	);
+
     function openPostModal() {
         onOpen();
         setPostModal(!postModal);
     }
     const postButtonClicked = async () => {
-        console.log("post content "+JSON.stringify(postContent));
-        createPost(postContent);
-        console.log("inside post btn click 2312133");
+        const newPostDetails = {
+            content: formState.content
+        }
+        dispatch(createPost(newPostDetails));
         onClose();
       }
     return (<div class="navbar-container">
@@ -46,8 +57,7 @@ export const NavBar = () => {
                 <ModalBody>
                     <div class="postmodal">
                         <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
-                        <input class="textarea postmodal-text-area" type="textbox" placeholder="What's happening" onChange={event => setPostContent(event.target.value)}></input>
-                      {/**   <textarea class="postmodal-text-area" placeholder="What's happening"></textarea>**/}
+                        <input class="textarea postmodal-text-area" type="textbox" placeholder="What's happening" onChange={e=>formDispatch({type: SET_CONTENT,payload: e.target.value })}></input>
                     </div>
                 </ModalBody>
 
