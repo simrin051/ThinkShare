@@ -5,7 +5,6 @@ import {
 import { TextField } from '../../../app/components/TextField';
 
 export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   
   const loginDialogClose = () => {
     setOpenLoginDialog(false);
@@ -18,8 +17,8 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
         <ModalHeader>Log In</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <TextField label="Email Address" placeholder="Email Address" type="email" />
-          <TextField label="Password" placeholder="Password" type="password" />
+          <TextField label="Email Address" type="email" />
+          <TextField label="Password" placeholder="******" type="password" />
           <Checkbox>Remember me</Checkbox>
         </ModalBody>
         <ModalFooter>
