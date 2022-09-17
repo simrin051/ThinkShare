@@ -1,28 +1,33 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button
+  Button, Checkbox, Modal, ModalBody,
+  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure
 } from '@chakra-ui/react';
+import { TextField } from '../../../app/components/TextField';
 
 export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  
+  const loginDialogClose = () => {
+    setOpenLoginDialog(false);
+  }
+
   return (
-    <Modal isOpen={openLoginDialog} onClose={!openLoginDialog}>
-    <ModalOverlay />
-    <ModalContent>
-      <ModalHeader>Modal Title</ModalHeader>
-      <ModalCloseButton />
-      <ModalBody>
-          
-      </ModalBody>
-      <ModalFooter>
-        <Button variant='ghost'>Secondary Action</Button>
-      </ModalFooter>
-    </ModalContent>
-  </Modal>
+    openLoginDialog && <Modal isOpen={openLoginDialog} onClose={loginDialogClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Log In</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <TextField label="Email Address" placeholder="Email Address" type="email" />
+          <TextField label="Password" placeholder="Password" type="password" />
+          <Checkbox>Remember me</Checkbox>
+        </ModalBody>
+        <ModalFooter>
+          <Button  colorScheme='blue' mr={3}>Log In</Button>
+          <Button  colorScheme='blue'>Log In as guest</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+
   );
 };

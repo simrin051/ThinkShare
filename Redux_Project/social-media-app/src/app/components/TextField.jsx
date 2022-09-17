@@ -1,9 +1,9 @@
-export const TextField = () => {
-return (<TextField
-  hiddenLabel
-  id="filled-hidden-label-small"
-  defaultValue="Small"
-  variant="filled"
-  size="small"
-/>)
+import { FormControl ,FormLabel,Input} from "@chakra-ui/react"
+
+export const TextField = ({label, placeholder, type}) => {
+return (<FormControl>
+  <FormLabel>{label}</FormLabel>
+  <Input placeholder={placeholder} type={type}/>
+</FormControl>
+)
 }
