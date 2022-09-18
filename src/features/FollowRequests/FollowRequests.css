@@ -1,0 +1,23 @@
+.follow-container .image-container {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+.follow-container{
+    display: flex;
+    flex-direction: row;
+    border-left:  solid #D3D3D3;
+    border-width: thin;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    white-space: nowrap;
+}
+
+.text-container .username {
+    font-weight: bold;
+}
