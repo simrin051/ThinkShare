@@ -1,0 +1,35 @@
+.post {
+    width: 100%;
+    min-height: 7rem;
+    border-top: thin solid #D3D3D3;
+    border-bottom: thin solid #D3D3D3;
+    position: relative;
+}
+
+.postmodal-image {
+    width: 6rem;
+    height: 6rem;
+}
+
+.postContent {
+    margin-left: 7rem;
+}
+
+.username {
+    margin-left: 7rem;
+    margin-right: 1rem;
+}
+
+.post-icons {
+    display: grid;
+    gap: 9rem;  
+    position: absolute;
+    bottom: 0;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.post-icons i {
+    padding-bottom: 1rem;
+    font-size: larger;
+    color :	#808080; 
+}

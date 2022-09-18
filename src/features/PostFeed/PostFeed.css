@@ -33,3 +33,6 @@ textarea {
     color: var(--secondary-color);
 }
 
+.postfeed {
+    margin-top: 3rem;
+}
