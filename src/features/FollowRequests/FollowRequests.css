@@ -1,9 +1,3 @@
-.follow-container .image-container {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-}
-
 .follow-container{
     display: flex;
     flex-direction: row;
@@ -14,10 +8,23 @@
 .text-container {
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
+    text-align: right;
     white-space: nowrap;
 }
 
-.text-container .username {
-    font-weight: bold;
-}
+
+.follow-btn {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    height: 2rem;
+    margin-top: 5px;
+    margin-left: 1em;
+    margin-right: 1em;
+    border-radius: 1rem;
+    float: right;
+    padding: 1em 0.5em;
+    color: #fff;
+    line-height: initial;
+  }
+  

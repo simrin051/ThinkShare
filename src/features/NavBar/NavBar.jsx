@@ -49,10 +49,16 @@ export const NavBar = () => {
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i><Link to="/profile">Profile</Link></li>
         </ul>
         <button class="navbar-btn" onClick={openPostModal}>Think & Share</button>
-        <div class="nav-footer">
-            <img class="image-container footer-postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
-            <i class="logout-icon fa fa-ellipsis"></i>
+       <div class="nav-footer">
+        <div class="user-container">
+            <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
+                <div class="user-details">
+                    <h2>username</h2>
+                    <h2>username</h2>
+                </div>
         </div>
+            <i class="logout-icon fa fa-ellipsis"></i>
+        </div> 
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
