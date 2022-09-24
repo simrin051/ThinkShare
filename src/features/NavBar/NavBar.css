@@ -88,3 +88,16 @@
   /**  margin-top: 2rem; **/
 }
 
+.nav-footer {
+    bottom: 0px;
+    position: fixed;
+    width: 25%;;
+    border-top: solid #D3D3D3;
+    border-width: thin;
+}
+
+.logout-icon {
+    padding-top: 5px;
+    float: right;
+    margin-right: 1rem;
+}

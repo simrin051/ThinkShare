@@ -1,6 +1,7 @@
 :root {
   --primary-color: #329FFF;
   --secondary-color: white;
+  --border-color: #D3D3D3;
   --medium-font-size: 1em;
   --large-font-size: 1.5em;
 }
