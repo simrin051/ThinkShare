@@ -93,7 +93,7 @@
     position: fixed;
     width: 25%;;
     border-top: solid #D3D3D3;
-    border-width: thin;
+    border-top-width: thin;
 }
 
 .logout-icon {
