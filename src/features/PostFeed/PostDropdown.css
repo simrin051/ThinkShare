@@ -1,0 +1,13 @@
+.menu-dropdown {
+    float: right;
+    text-align: left;
+    z-index: 999;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color:   #D9D9D6;
+}
+
+.menu-dropdown .menu-option {
+    padding: 8px;
+}
