@@ -34,26 +34,12 @@
     color: var(--secondary-color);
 }
 
-.textarea {
-    /**
-    border: none;
-    border-bottom: 1px solid black;
-    background-color: transparent;
-    resize: none;
-    outline: none;
-    display: inline-block;
-    margin-left: 5px;
-    margin-bottom: 1.5rem;
-   **/
-}
-
 .image-container {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
     margin-left: 5px;
 }
-
 
 .footer-image-container {
     width: 5rem;
@@ -90,18 +76,23 @@
     height: 6rem;
     position: fixed;
     width: 25%;
-    border-top: solid #D3D3D3;
-    border-top-width: thin;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
 }
 
-.user-container{
-    width: 100%;
+.user-container {
+    width: 17rem;
     display: flex;
     flex-direction: row;
-    margin-left: 4rem;
+    margin-left: 5rem;
+    border-radius: 20px;
+    padding: 5px;
+    height: 5rem;
+}
+
+.user-container:hover {
+    background-color: #BFBFBD;
 }
 
 .user-details {
@@ -110,8 +101,33 @@
 }
 
 .logout-icon {
-    padding-top: 5px;
+    padding-top: 1rem;
     padding-right: 5px;
     float: right;
     text-align: right;
+}
+
+.logout-container {
+    border-radius: 20px;
+    height: 8rem;
+    width: 17rem;
+    margin-left: 5rem;
+    margin-right: 1rem;
+    padding: 5px;
+    position: absolute;
+    bottom: 7rem;
+    box-shadow:2px 2px 2px 2px #C9C9C9;
+}
+
+.logout-username {
+    border: none;
+    border-top: solid #D3D3D3;
+    border-width: thin;
+    margin-left: 1rem;
+    margin-top: 2rem;
+}
+
+.border-line {
+    border-bottom: solid #D3D3D3;
+    border-width: thin;
 }

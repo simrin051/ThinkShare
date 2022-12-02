@@ -19,9 +19,11 @@ import { ACTIONS } from '../posts/reducer/createPostFormReducer';
 import { postsReducer } from '../posts/reducer/createPostFormReducer';
 import { initialStateOfPostForm } from '../posts/reducer/createPostFormReducer';
 import { CircularProgressWithLabel } from '../../app/components/CircularProgressWithLabel';
+import { LogoutDialog } from './LogoutDialog';
 
 export const NavBar = () => {
     const { SET_CONTENT } = ACTIONS;
+    const [logOutModal,setLogoutModal] = useState(false);
     const [postModal, setPostModal] = useState(false);
     const [postContentLength, setPostContentLength] = useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,9 +75,10 @@ export const NavBar = () => {
                     <h2>username</h2>
                     <h2>username</h2>
                 </div>
+                <i class="logout-icon fa fa-ellipsis" onClick={()=>setLogoutModal(!logOutModal)}></i>
             </div>
-            <i class="logout-icon fa fa-ellipsis"></i>
         </div>
+        {logOutModal && <LogoutDialog></LogoutDialog>}
         <Modal isOpen={isOpen} onClose={onCloseFunc}>
             <ModalOverlay />
             <ModalContent>
