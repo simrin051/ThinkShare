@@ -5,6 +5,7 @@ import {
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { TextField } from '../../../app/components/TextField';
 import { ErrorTextField } from '../../../app/components/ValidationMessage';
 import { ERROR_MIN_PWD,MIN_PWD_LENGTH ,INCORRECT_LOGIN_CREDENTIALS} from '../../../utils/constants';
@@ -28,9 +29,13 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
       type: "CLEAR_ALL_LOGIN_FIELDS"
     })
   }
-  
+
+  const navigate = useNavigate();
   const loginAccount = async () => {
-   const  res = await dispatch(signin(formState));
+   const  res = await dispatch(signin(formState))
+   .then(() => {
+    navigate('/home');
+  });
     if(res.meta.requestStatus=="rejected") {
       formDispatch({
         type: "SET_API_ERROR",

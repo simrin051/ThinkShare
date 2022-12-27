@@ -9,6 +9,7 @@ import { errorReducer, formsReducer, signup } from '../Authentication';
 import { useReducer } from 'react';
 import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,MIN_PWD_LENGTH,ERROR_EMAIL_FORMAT } from '../../../utils/constants';
 import { ErrorTextField } from '../../../app/components/ValidationMessage';
+import { useNavigate } from 'react-router-dom';
   
   export const SignupDialog = ({ openSignupDialog, setOpenSignupDialog }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,10 +33,13 @@ import { ErrorTextField } from '../../../app/components/ValidationMessage';
           type: "CLEAR_ALL_SIGNUP_FIELDS"
         })
     }
-  
+    const navigate = useNavigate();
     const createNewAccount =  () => {
       checkFormValidity();
-       dispatch(signup(formState));
+       dispatch(signup(formState))
+       .then(() => {
+        navigate('/home');
+      });
       }
 
     

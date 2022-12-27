@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { INCORRECT_LOGIN_CREDENTIALS } from '../../utils/constants';
+import { Navigation } from '../../utils/Navigation';
 import { signup,signin} from './Authentication';
 
 export let initialState = {
@@ -10,7 +11,6 @@ export let initialState = {
 	loading: false,
 	error: ""
 }
-
 
 export const authSlice = createSlice({
     name: "auth",
@@ -24,7 +24,6 @@ export const authSlice = createSlice({
       [signup.fulfilled]: (state, action) => {
         console.log(" Action "+JSON.stringify(action));
         console.log("sign up fulfilled");
-        Navigate("/home")
       },
       [signup.rejected]: (state, action) => {
         console.log("sign up rejected");
