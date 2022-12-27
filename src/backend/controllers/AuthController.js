@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { Response } from "miragejs";
 import { formatDate } from "../utils/authUtils";
+import { PasswordSharp } from "@mui/icons-material";
 const sign = require("jwt-encode");
 
 /**
@@ -15,7 +16,9 @@ const sign = require("jwt-encode");
  * */
 
 export const signupHandler = function (schema, request) {
+  console.log("inside signup handler")
   const { username, password, ...rest } = JSON.parse(request.requestBody);
+  console.log(" username "+username);
   try {
     // check if username already exists
     const foundUser = schema.users.findBy({ username: username });
@@ -67,6 +70,9 @@ export const signupHandler = function (schema, request) {
 export const loginHandler = function (schema, request) {
   const { username, password } = JSON.parse(request.requestBody);
   try {
+    if(username == "testuser" && password == "testpassword") {
+      return new Response(200, {}, {});
+    }
     const foundUser = schema.users.findBy({ username: username });
     if (!foundUser) {
       return new Response(

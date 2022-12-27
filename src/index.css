@@ -6,3 +6,12 @@
   --large-font-size: 1.5em;
 }
 
+.error-text {
+  color: var(--primary-color);
+  font-size: var(--medium-font-size);
+  display: block;
+}
+
+.mr-2 {
+  margin-right: 2px;
+}

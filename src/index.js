@@ -7,9 +7,13 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
+import { makeServer } from './server';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+
+//Call make server
+makeServer();
 
 root.render(
   <React.StrictMode>
