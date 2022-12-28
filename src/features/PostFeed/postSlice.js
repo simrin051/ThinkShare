@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { API_URL } from '../../utils/constants';
 import axios from 'axios';
-import { createPost, fetchPostById, getPosts } from './PostService';
+import { createPost, deletePost, fetchPostById, getPosts } from './PostService';
 
 
 
@@ -11,11 +11,12 @@ export const postSlice = createSlice({
        posts: []
     },
     reducers: {
-        setPosts: (state,action) =>{ 
-        return  {
-            posts : state.posts.concat(action.payload)
-        } 
-    }
+        setPosts: (state,{payload}) =>{ 
+           return  {
+                posts : state.posts.length>payload.length?payload:state.posts.concat(payload)
+            } 
+        }
+    
     },
     extraReducers: {
         [getPosts.pending]: (state) => {
@@ -33,6 +34,16 @@ export const postSlice = createSlice({
      		state.status = 'succeeded';
         },
         [createPost.rejected]: (state,action) => {
+            state.status = 'failed';
+        },
+        
+        [deletePost.pending]: (state,action) => {
+            state.status = 'pending';
+        },
+        [deletePost.fulfilled]: (state,action) => {
+     		state.status = 'succeeded';
+        },
+        [deletePost.rejected]: (state,action) => {
             state.status = 'failed';
         },
         [fetchPostById.pending]:  (state,action) => {

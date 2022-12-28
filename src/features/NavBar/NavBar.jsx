@@ -41,7 +41,6 @@ export const NavBar = () => {
 
 
     const postButtonClicked = async () => {
-        console.log(" form state "+JSON.stringify(formState));
         const postData = {
             content: formState.content
         }

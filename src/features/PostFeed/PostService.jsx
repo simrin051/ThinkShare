@@ -22,8 +22,6 @@ export const createPost = createAsyncThunk(
                 'Content-Type': 'application/json',
                  'authorization': getCookie(tokenKey)
                 }}).then(result=>{
-                    console.log(" inside create post ");
-                    console.log(JSON.stringify(result.data.posts[result.data.posts.length-1]));
                     thunkAPI.dispatch(setPosts(result.data.posts))
                 });
         } catch (err) {
@@ -32,14 +30,30 @@ export const createPost = createAsyncThunk(
     }
 )
 
+export const deletePost = createAsyncThunk("posts/deletePost",
+async (postId,thunkAPI) => {
+    try {
+      await axios.delete(`/api/posts/${postId}`,{headers: {
+            'Content-Type': 'application/json',
+             'authorization': getCookie(tokenKey)
+            }}).then(result=>{
+                console.log("length of posts -- delete post "+result.data.posts.length);
+                thunkAPI.dispatch(setPosts(result.data.posts))
+            });
+    } catch (err) {
+        thunkAPI.rejectWithValue(err);
+    }
+})
+
 export const getPosts = createAsyncThunk(
     'posts/getPosts',async(_,thunkAPI)=> {   
      await axios.get('/api/posts',{headers: {
             'Content-Type': 'application/json',
              'authorization': getCookie(tokenKey)
             }}).then(result => {
-                console.log(" length of data posts "+JSON.stringify(result.data.posts[0].username));
                 thunkAPI.dispatch(setPosts(result.data.posts))
               }).catch ( err=> {
                })
 })
+
+

@@ -64,9 +64,7 @@ export const getAllUserPostsHandler = function (schema, request) {
  * */
 
 export const createPostHandler = function (schema, request) {
-  console.log("inside create post handler");
   const user = requiresAuth.call(this, request);
-  console.log(" user "+JSON.stringify(user));
   try {
     if (!user) {
       return new Response(
@@ -255,6 +253,7 @@ export const dislikePostHandler = function (schema, request) {
  * send DELETE Request at /api/user/posts/:postId
  * */
 export const deletePostHandler = function (schema, request) {
+  console.log("before delete "+this.db.posts);
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -270,6 +269,15 @@ export const deletePostHandler = function (schema, request) {
     }
     const postId = request.params.postId;
     let post = schema.posts.findBy({ _id: postId }).attrs;
+    if(post == null) {
+      return new Response(
+        404,
+        {},
+        
+          "Post not found"
+        
+      );      
+    } 
     if (post.username !== user.username) {
       return new Response(
         400,
@@ -282,6 +290,7 @@ export const deletePostHandler = function (schema, request) {
       );
     }
     this.db.posts.remove({ _id: postId });
+    console.log("after delete "+this.db.posts);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(

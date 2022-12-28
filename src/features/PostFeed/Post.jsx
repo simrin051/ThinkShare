@@ -13,7 +13,7 @@ export const Post = ({postData}) => {
               {!menuIcon && <div class="post-menu-icon-container" onClick={()=>{setDisplayMenuIcon(!menuIcon)}}>
                 <i class="post-menu-icon fa fa-ellipsis"></i>
               </div>}
-                {menuIcon && <PostDropdown setDisplayMenuIcon={setDisplayMenuIcon} class="post-dropdown" id="post-dropdown"/>}
+                {menuIcon && <PostDropdown postId={postData._id} setDisplayMenuIcon={setDisplayMenuIcon} class="post-dropdown" id="post-dropdown"/>}
                 <div class="postContent">
                     {postData.content}
                     <div class="post-icons">

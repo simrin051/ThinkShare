@@ -14,7 +14,6 @@ const postButtonClicked = async () => {
 export const PostFeed = () => {
    // const dispatch = useDispatch();  
     const posts = useSelector((state) => {
-        console.log(" inside post feed "+JSON.stringify(state));
         return state.post.posts;
     })
     return(<div class="post-container">
