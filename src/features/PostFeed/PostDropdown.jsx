@@ -9,7 +9,6 @@ export const PostDropdown = (props) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
           if (!ref.current.contains(event.target)) {
-            console.log("outside click");
             props.setDisplayMenuIcon(false);
           }
         };

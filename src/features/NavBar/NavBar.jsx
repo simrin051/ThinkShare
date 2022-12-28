@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
-import { createPost } from '../PostFeed/postSlice';
+import { createPost } from '../PostFeed/PostService';
 import { useDispatch } from 'react-redux';
 import { ACTIONS } from '../posts/reducer/createPostFormReducer';
 import { postsReducer } from '../posts/reducer/createPostFormReducer';
@@ -41,10 +41,11 @@ export const NavBar = () => {
 
 
     const postButtonClicked = async () => {
-        const newPostDetails = {
+        console.log(" form state "+JSON.stringify(formState));
+        const postData = {
             content: formState.content
         }
-        dispatch(createPost(newPostDetails));
+        dispatch(createPost(postData));
         setPostContentLength(0);
         onClose();
     }

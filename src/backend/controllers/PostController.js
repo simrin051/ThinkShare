@@ -59,13 +59,14 @@ export const getAllUserPostsHandler = function (schema, request) {
 
 /**
  * This handler handles creating a post in the db.
- * send POST Request at /api/user/posts/
+ * send POST Request at /api/posts/
  * body contains {content}
  * */
 
 export const createPostHandler = function (schema, request) {
-  console.log("inside create post handler ");
+  console.log("inside create post handler");
   const user = requiresAuth.call(this, request);
+  console.log(" user "+JSON.stringify(user));
   try {
     if (!user) {
       return new Response(

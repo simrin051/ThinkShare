@@ -7,16 +7,14 @@ export const initialStateOfPostForm = {
 }
 
 export  function postsReducer(state = initialStateOfPostForm, {payload , type}) {
-    console.log("inside posts reducer");
     const {
 		SET_CONTENT
 	} = ACTIONS;
 
     switch (type) {
      case SET_CONTENT: 
-        console.log("inside set content");
-        return { ...state, content: payload.content };
+        return { ...state, content: payload };
       default:
-        return state
+        return initialStateOfPostForm;
     }
 }

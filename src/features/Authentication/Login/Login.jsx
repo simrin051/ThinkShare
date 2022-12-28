@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { TextField } from '../../../app/components/TextField';
 import { ErrorTextField } from '../../../app/components/ValidationMessage';
 import { ERROR_MIN_PWD,MIN_PWD_LENGTH ,INCORRECT_LOGIN_CREDENTIALS} from '../../../utils/constants';
-import { errorReducer, formsReducer, signin } from '../Authentication';
+import { errorReducer, formsReducer, signin } from '../AuthenticationService';
 
 export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
   
@@ -36,6 +36,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
    .then(() => {
     navigate('/home');
   });
+   
     if(res.meta.requestStatus=="rejected") {
       formDispatch({
         type: "SET_API_ERROR",
@@ -47,7 +48,10 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
   const loginGuestAccount = async () => {
     formState.username = "testuser";
     formState.password = "testpassword";
-    const  res = await dispatch(signin(formState));
+    const  res = await dispatch(signin(formState))
+    .then(() => {
+      navigate('/home');
+    });
     if(res.meta.requestStatus=="rejected") {
       formDispatch({
         type: "SET_API_ERROR",

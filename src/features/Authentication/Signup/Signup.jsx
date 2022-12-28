@@ -5,11 +5,12 @@ import {
   } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
   import { TextField } from '../../../app/components/TextField';
-import { errorReducer, formsReducer, signup } from '../Authentication';
+import { errorReducer, formsReducer, signup } from '../AuthenticationService';
 import { useReducer } from 'react';
 import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,MIN_PWD_LENGTH,ERROR_EMAIL_FORMAT } from '../../../utils/constants';
 import { ErrorTextField } from '../../../app/components/ValidationMessage';
 import { useNavigate } from 'react-router-dom';
+import { getPosts } from '../../PostFeed/PostService';
   
   export const SignupDialog = ({ openSignupDialog, setOpenSignupDialog }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,7 +53,6 @@ import { useNavigate } from 'react-router-dom';
      }
 
     const checkFormValidity = () => {
-      console.log(" form state "+JSON.stringify(formState)); 
       if(!validateEmail(formState.email)) {
         return formDispatch({
           type: "EMAIL_ERROR",

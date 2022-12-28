@@ -1,11 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setAuthCookies } from "../../utils/AuthCookies";
 import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,ERROR_EMAIL_FORMAT } from "../../utils/constants";
 
-export const signup =  createAsyncThunk("auth/signup",async ( {firstName, lastName, username, password})=>{
+export const signup =  createAsyncThunk("auth/signup",async ( {firstName, lastName, username, password},{ rejectWithValue })=>{
+  try {
   await axios.post(`/api/auth/signup`,({firstName, lastName, username, password}),{headers: {
     'Content-Type': 'application/json',
-    }});
+    }}).then((res)=>{
+      let cookieObj = {
+        encodedToken: res.data.encodedToken,
+        username: username
+      }
+      setAuthCookies(cookieObj);
+    });
+  } catch(err) {
+    return rejectWithValue(err.statusText);
+  }
 })
 
 export const signin = createAsyncThunk("auth/signin",async (body,{ rejectWithValue })=>{
@@ -20,7 +31,6 @@ export const signin = createAsyncThunk("auth/signin",async (body,{ rejectWithVal
 
 
 export const formsReducer = (state, { type, payload }) => {
-  console.log("type "+type+" payload "+payload);
   switch (type) {
       case 'SET_FIRSTNAME': return {
           ...state,
