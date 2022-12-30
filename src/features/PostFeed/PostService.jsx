@@ -1,18 +1,25 @@
-import { Store } from "@mui/icons-material";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { store } from "../../app/store";
-import { getCookie, tokenKey } from "../../utils/AuthCookies";
+import { getCookie } from "../../utils/AuthCookies";
+import { tokenKey } from "../../utils/constants";
 import { setPosts } from "./PostSlice";
 
 export const fetchPostById = createAsyncThunk(
     'posts/fetchPostById',
-    async (userId, thunkAPI) => {
-        //const response = await userAPI.fetchById(userId)
-        //return response.data
+    async (postId, thunkAPI) => {
+        try {
+           const res = await axios.get(`/api/posts/${postId}`,{headers: {
+                  'Content-Type': 'application/json'
+                  }})
+           return res.data.post;
+          } catch (err) {
+              console.error(err)
+          }
+  
     }
 )
+
+
 
 export const createPost = createAsyncThunk(
     "posts/createPost",
@@ -38,10 +45,41 @@ async (postId,thunkAPI) => {
              'authorization': getCookie(tokenKey)
             }}).then(result=>{
                 console.log("length of posts -- delete post "+result.data.posts.length);
+               
                 thunkAPI.dispatch(setPosts(result.data.posts))
             });
     } catch (err) {
         thunkAPI.rejectWithValue(err);
+    }
+})
+
+export const likePost = createAsyncThunk(
+    'posts/likePost',async(postId,thunkAPI)=> {   
+        try {
+            axios.defaults.headers = {
+                'Content-Type': 'application/json',
+                authorization: getCookie(tokenKey)
+            }
+            await axios.post(`/api/posts/like/${postId}`).then(result=>{
+              //  thunkAPI.dispatch(setPosts(result.data.posts))
+            })
+          } catch (err) {
+              thunkAPI.rejectWithValue(err);
+          }
+})
+
+export const dislikePost = createAsyncThunk(
+    'posts/dislikePost',async(postId,thunkAPI)=> {   
+    try {
+        console.log(" dislike post "+postId);
+        await axios.post(`/api/posts/dislike/${postId}`,{headers: {
+            'Content-Type': 'application/json',
+             'authorization': getCookie(tokenKey)
+            }}).then(result=>{
+               // thunkAPI.dispatch(setPosts(result.data.posts))
+            })
+    } catch(err) {
+        console.log(err);
     }
 })
 

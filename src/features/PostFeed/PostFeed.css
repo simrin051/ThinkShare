@@ -18,14 +18,14 @@ textarea {
 
 .post-container {
     display: inline-block;
-    border-left: solid #D3D3D3;
-    border-width: thin;
+  
 }
 
 .share-btn {
     background-color: var(--primary-color);
     width: 5rem;
     height: 2rem;
+    margin-top: 5px;
     float: right;
     margin-right: 1rem;
     border: none;
@@ -33,6 +33,34 @@ textarea {
     color: var(--secondary-color);
 }
 
+.dropdown {
+    float: right;
+    top: 1rem;
+    right: 1rem;
+    position: relative;
+    z-index: 999;
+}
+
+.option {
+   background-color: #E6E6E3;
+    padding: 5px;
+}
+
+.option.color-red{
+    color:red;
+}
+
+.option.color-yellow {
+    color: #EAAA00;
+}
+
 .postfeed {
     margin-top: 3rem;
+}
+
+.menu-icon{
+    float: right;
+    top: 1rem;
+    right: 1rem;
+    position: relative;
 }

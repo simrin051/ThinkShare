@@ -1,5 +1,4 @@
-export const tokenKey = "AUTH_TOKEN";
-export const userNameKey = "AUTH_USERNAME";
+import { tokenKey, userNameKey } from "./constants";
 
 export const setAuthCookies = (cookieObj) => {    
     localStorage.setItem(tokenKey,cookieObj.encodedToken);

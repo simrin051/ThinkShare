@@ -64,7 +64,7 @@ export const NavBar = () => {
         <ul class="sidebar-nav-links">
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-house"></i>Home</li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-hashtag"></i>Explore</li>
-            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-bookmark"></i>BookMarks</li>
+            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-bookmark"></i><Link to="/bookmarks">Bookmarks</Link></li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i><Link to="/profile">Profile</Link></li>
         </ul>
         <button class="navbar-btn" onClick={openPostModal}>Think & Share</button>

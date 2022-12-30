@@ -15,3 +15,19 @@
 .mr-2 {
   margin-right: 2px;
 }
+
+.center {
+  text-align: center;
+}
+
+.subheading {
+  display: block;
+  font-size: 75%;
+  opacity: 0.75;
+}
+
+.message{
+  display: block;
+  font-size: 1.5em;
+  opacity: 0.75;
+}

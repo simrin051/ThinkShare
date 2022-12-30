@@ -4,6 +4,7 @@ import { Home } from './features/Home/Home';
 import { Profile } from './features/Profile/Profile';
 import './App.css';
 import { Landing } from './features/Landing/Landing';
+import { BookMarks } from './features/BookMarks/BookMarks';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/bookmarks" element={<BookMarks />} />
       </Routes>
     </div>
   );
