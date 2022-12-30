@@ -9,13 +9,19 @@ export let initialState = {
 	user: {},
 	token: "",
 	loading: false,
-	error: ""
+	error: "",
+  bookmarks: {}
 }
 
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+      setBookmarks: (state,{payload}) => {
+        return{
+       ...state, 
+       bookmarks :payload
+      }}
     },
     extraReducers: {
       [signup.pending]: (state, action) => {
@@ -34,4 +40,5 @@ export const authSlice = createSlice({
       }    
 });
 
+export const {setBookmarks} =  authSlice.actions;
 export default authSlice.reducer;

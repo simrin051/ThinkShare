@@ -1,5 +1,6 @@
 
 import { useDispatch } from 'react-redux';
+import { getBookMarks, getUser } from '../Authentication/UserService';
 import { FollowRequests } from '../FollowRequests/FollowRequests';
 import { NavBar } from '../NavBar/NavBar';
 import { PostFeed } from '../PostFeed/PostFeed';
@@ -8,6 +9,7 @@ import './Home.css';
 export const Home = () => {
     const dispatch = useDispatch();
     dispatch(getPosts())
+   
     return (
     <div class="home-container"><NavBar/><PostFeed/><FollowRequests/></div>)
 }

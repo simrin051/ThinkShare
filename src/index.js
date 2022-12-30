@@ -9,7 +9,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { makeServer } from './server';
 import { AppWrapper } from './AppWrapper';
+import { tokenKey } from './utils/constants';
+import { getCookie } from './utils/AuthCookies';
+import axios from "axios";
 
+axios.defaults.headers.common['authorization'] = getCookie(tokenKey);
 const container = document.getElementById('root');
 const root = createRoot(container);
 

@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCookie } from "../../utils/AuthCookies";
 import { tokenKey } from "../../utils/constants";
+import { setBookmarks } from "../Authentication/AuthenticationSlice";
 
 export const addBookmark = createAsyncThunk(
     'bookmark/addBookmark',async(postId,thunkAPI)=> {   
@@ -9,7 +10,7 @@ export const addBookmark = createAsyncThunk(
             await axios.post(`/api/users/bookmark/${postId}`,{headers: {
                   'Content-Type': 'application/json',
                    'authorization': getCookie(tokenKey)
-                  }}).then((res)=>{})
+                  }}).then((res)=>{thunkAPI.dispatch(setBookmarks(res.data.bookmarks));})
           } catch (err) {
                 console.log("book mark "+err);
               thunkAPI.rejectWithValue(err);

@@ -57,8 +57,7 @@ export const likePost = createAsyncThunk(
     'posts/likePost',async(postId,thunkAPI)=> {   
         try {
             axios.defaults.headers = {
-                'Content-Type': 'application/json',
-                authorization: getCookie(tokenKey)
+                'Content-Type': 'application/json'
             }
             await axios.post(`/api/posts/like/${postId}`).then(result=>{
               //  thunkAPI.dispatch(setPosts(result.data.posts))
