@@ -5,6 +5,7 @@ import { Profile } from './features/Profile/Profile';
 import './App.css';
 import { Landing } from './features/Landing/Landing';
 import { BookMarks } from './features/BookMarks/BookMarks';
+import { EditPostModal } from './features/PostFeed/EditPostModal';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/bookmarks" element={<BookMarks />} />
+
       </Routes>
     </div>
   );

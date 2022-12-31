@@ -1,26 +1,52 @@
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
+  Button, Modal, ModalBody,
+  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useDisclosure
 } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { addPostComment } from './CommentService';
+import './Modal.css';
 
-export const CommentModal = () => {
-    console.log(" inside comment modal ");
+let comment = "";
+
+const setComment = (e) => {
+  comment = e.target.value;
+}
+
+
+export const CommentModal = ({postData,setCommentModal}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
+  const postComment = (id) => {
+    dispatch(addPostComment(id,comment))
+  }
+
+  const closeModal = () => {
+    setCommentModal(false);
+    onClose();
+  }
+  
     return(
-        <Modal>
+        <Modal isOpen="true" onClose={closeModal}>
         <ModalOverlay />
         <ModalContent>
             <ModalHeader></ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                <div class="postmodal">
-                    <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
-                    <textarea  class="textarea postmodal-text-area" placeholder="What's happening"></textarea>
-                </div>
+              <div class="postedUsername">
+                {postData.username}
+              </div>
+              <div class="post">
+                    {postData.content}  
+              </div>
+              <div class="reply">
+              <h2>Replying</h2>
+           
+        <Textarea onChange={(e)=>setComment(e,postData._id)}/>  
+            <div class="comment-btns">
+                <Button colorScheme='blue' onClick={()=>postComment(postData._id)}>Post</Button>
+                <Button colorScheme='blue' onClick={()=>closeModal()}>Cancel</Button>
+            </div>
+              </div>
             </ModalBody>
             <ModalFooter>               
             </ModalFooter>

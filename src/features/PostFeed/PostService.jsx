@@ -8,10 +8,9 @@ export const fetchPostById = createAsyncThunk(
     'posts/fetchPostById',
     async (postId, thunkAPI) => {
         try {
-           const res = await axios.get(`/api/posts/${postId}`,{headers: {
+          await axios.get(`/api/posts/${postId}`,{headers: {
                   'Content-Type': 'application/json'
                   }})
-           return res.data.post;
           } catch (err) {
               console.error(err)
           }
@@ -43,9 +42,7 @@ async (postId,thunkAPI) => {
       await axios.delete(`/api/posts/${postId}`,{headers: {
             'Content-Type': 'application/json',
              'authorization': getCookie(tokenKey)
-            }}).then(result=>{
-                console.log("length of posts -- delete post "+result.data.posts.length);
-               
+            }}).then(result=>{  
                 thunkAPI.dispatch(setPosts(result.data.posts))
             });
     } catch (err) {
@@ -56,13 +53,14 @@ async (postId,thunkAPI) => {
 export const likePost = createAsyncThunk(
     'posts/likePost',async(postId,thunkAPI)=> {   
         try {
-            axios.defaults.headers = {
+            await axios.post(`/api/posts/like/${postId}`,{headers : {
                 'Content-Type': 'application/json'
             }
-            await axios.post(`/api/posts/like/${postId}`).then(result=>{
-              //  thunkAPI.dispatch(setPosts(result.data.posts))
+            }).then(result=>{
+                thunkAPI.dispatch(setPosts(result.data.posts))
             })
           } catch (err) {
+            console.log(err);
               thunkAPI.rejectWithValue(err);
           }
 })
@@ -70,12 +68,11 @@ export const likePost = createAsyncThunk(
 export const dislikePost = createAsyncThunk(
     'posts/dislikePost',async(postId,thunkAPI)=> {   
     try {
-        console.log(" dislike post "+postId);
         await axios.post(`/api/posts/dislike/${postId}`,{headers: {
             'Content-Type': 'application/json',
              'authorization': getCookie(tokenKey)
             }}).then(result=>{
-               // thunkAPI.dispatch(setPosts(result.data.posts))
+                thunkAPI.dispatch(setPosts(result.data.posts))
             })
     } catch(err) {
         console.log(err);

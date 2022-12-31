@@ -1,0 +1,6 @@
+.comment-btns{
+    display: flex;
+    grid-column-gap: 2em;
+    float: right;
+    margin-top: 1em;
+}

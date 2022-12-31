@@ -4,14 +4,15 @@ import { getCookie} from "../../utils/AuthCookies";
 import { tokenKey } from "../../utils/constants";
 
 export const addPostComment = createAsyncThunk(
-    'postComment/addComment',async(postId,thunkAPI)=> {   
+    'postComment/addComment',async(postId,postComment,thunkAPI)=> {   
         console.log(" inside add post comment ");
         try {
-            await axios.post(`/api/comments/add/${postId}`,{commentData:{text:"serene"}},{headers: {
+            await axios.post(`/api/comments/add/${postId}`,{commentData:{text:postComment}},{headers: {
                   'Content-Type': 'application/json',
                    'authorization': getCookie(tokenKey)
-                  }}).then((res)=>{console.log(res)})
+                  }}).then((res)=>{})
           } catch (err) {
+            console.log(err);
               thunkAPI.rejectWithValue(err);
           }
 })

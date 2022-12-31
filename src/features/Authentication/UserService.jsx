@@ -14,13 +14,11 @@ export const getBookMarks = createAsyncThunk("bookmarks/getBookmarks",async (bod
 })
 
 export const getUser = createAsyncThunk("user/getUser",async (userId,{thunkAPI, rejectWithValue })=>{
-  console.log("inside get user"); 
   try {
     await axios.get(`/api/users/${userId}`,{headers: {
       'Content-Type': 'application/json',
       }})
       .then(res=>{
-        console.log(" response data user "+JSON.stringify(res.data.user));
         });
     } catch(err) {
       console.log(err);

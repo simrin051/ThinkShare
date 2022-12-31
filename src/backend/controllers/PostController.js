@@ -168,7 +168,6 @@ export const likePostHandler = function (schema, request) {
       );
     }
     const postId = request.params.postId;
-    console.log(" inside post controller "+postId);
     const post = schema.posts.findBy({ _id: postId }).attrs;
     if (post.likes.likedBy.some((currUser) => currUser._id === user._id)) {
       return new Response(
@@ -254,7 +253,6 @@ export const dislikePostHandler = function (schema, request) {
  * send DELETE Request at /api/user/posts/:postId
  * */
 export const deletePostHandler = function (schema, request) {
-  console.log("before delete "+this.db.posts);
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {

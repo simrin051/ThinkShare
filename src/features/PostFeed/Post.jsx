@@ -1,42 +1,36 @@
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import useClickOutside from '../../app/customhooks/useClickOutside';
+import { getCookie } from '../../utils/AuthCookies';
+import { userNameKey } from '../../utils/constants';
 import { addBookmark } from './BookMarkService';
+import { CommentModal } from './CommentModal';
+
 import { addPostComment } from './CommentService';
+import { EditPostModal } from './EditPostModal';
 import './Post.css';
 import { PostDropdown } from './PostDropdown';
 import { dislikePost, fetchPostById, likePost } from './PostService';
 
 export const Post = ({postData}) => {
-    const [menuIcon, setDisplayMenuIcon] = useState(false);
+    const [menuIcon, setDisplayMenuIcon] = useState(true);
     const [commentModal, setCommentModal] = useState(false);
+    const [ editModal,setEditModal] = useState(false);
+    
     const dispatch = useDispatch();
-    const reactPost = ({_id,username,likes}) => {
-       
-        fetchThePost(_id,username);
+    
+    const reactPost = ({_id,likes}) => {
+        if(isPostLikedByUser(likes.likedBy,getCookie(userNameKey)))  {
+            dispatch(dislikePost(_id))
+        }
+        else {
+            dispatch(likePost(_id))
+        } 
     }
 
-    const fetchThePost = (_id,username) => {
-        dispatch(fetchPostById(_id))
-        .then(res=>{
-            console.log(JSON.stringify(res.payload.likes));
-        //   const {likes} = res.data.post;
-        console.log(" res likes "); 
-        console.log(res.likes);
-        
-            if( isPostLikedByUser(res.payload.likes?.likedBy,username))  {
-                console.log(" Dislike "+_id);
-                dispatch(dislikePost(_id))
-            }
-            else {
-                console.log(" Like");
-                dispatch(likePost(_id))
-            } 
-        })
-    }
     const isPostLikedByUser = (likedByData,username) => {
         for(let i=0;i<likedByData.length;i++) {
-            console.log(likedByData[i]+" ** "+username);
-            if(likedByData[i]==(username)) {
+            if(likedByData[i].username==(username)) {
                 return true;
             }
         }
@@ -44,16 +38,10 @@ export const Post = ({postData}) => {
     }
 
     const commentPost= (postData) => {
-        console.log(" inside comment post "+postData._id);
-        dispatch(addPostComment(postData._id));
-       /* console.log("inside comment post");
-        setCommentModal(commentModal=> !commentModal);
-        console.log(commentModal);
-       <CommentModal/> */
+        setCommentModal(true);
     }
 
     const bookMarkPost = (postData) => {
-        console.log(" inside bookmark post "+postData._id);
         dispatch(addBookmark(postData._id));
     }
 
@@ -62,10 +50,10 @@ export const Post = ({postData}) => {
               <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
               <span class="username">{postData.username}</span> 
               <span class="postTime">{postData.createdAt}</span>
-              {!menuIcon && <div class="post-menu-icon-container" onClick={()=>{setDisplayMenuIcon(!menuIcon)}}>
+              {menuIcon && <div class="post-menu-icon-container" onClick={()=>{setDisplayMenuIcon(!menuIcon)}}>
                 <i class="post-menu-icon fa fa-ellipsis"></i>
               </div>}
-                {menuIcon && <PostDropdown postData={postData} setDisplayMenuIcon={setDisplayMenuIcon} class="post-dropdown" id="post-dropdown"/>}
+               {!menuIcon && <PostDropdown postData={postData} menuIcon={menuIcon} setDisplayMenuIcon={setDisplayMenuIcon} setEditModal={setEditModal} class="post-dropdown" id="post-dropdown"/>}
                 <div class="postContent">
                     {postData.content}
                     <div class="post-icons">
@@ -74,6 +62,10 @@ export const Post = ({postData}) => {
                         <i class="fa-regular fa-bookmark" onClick={()=>{bookMarkPost(postData)}}></i>
                     </div>
                 </div>
+               {<EditPostModal postData={postData} editModal={editModal} setEditModal={setEditModal}/>} 
+              {commentModal && <CommentModal postData={postData} setCommentModal={setCommentModal}/>}
         </div>
     )
 }
+
+export default React.forwardRef(PostDropdown);

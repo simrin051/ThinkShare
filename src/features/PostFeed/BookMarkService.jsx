@@ -36,7 +36,7 @@ export const getBookmarks = createAsyncThunk(
             await axios.post(`/api/users/bookmark/`,{headers: {
                   'Content-Type': 'application/json',
                    'authorization': getCookie(tokenKey)
-                  }}).then((res)=>{console.log(res)})
+                  }}).then((res)=>{})
           } catch (err) {
               thunkAPI.rejectWithValue(err);
           }

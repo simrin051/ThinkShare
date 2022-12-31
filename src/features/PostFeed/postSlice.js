@@ -13,9 +13,9 @@ export const postSlice = createSlice({
     },
     reducers: {
         setPosts: (state,{payload}) =>{ 
-            console.log("inside set posts");
             return  {
-               posts : state.posts.length>=payload.length?payload:state.posts.concat(payload)
+               posts : payload
+               //.length>=payload.length?payload:state.posts.concat(payload)
               //  posts: state.posts.concat(payload)
             } 
         }
