@@ -21,7 +21,13 @@ export const authSlice = createSlice({
         return{
        ...state, 
        bookmarks :payload
-      }}
+      }},
+      setUser: (state,payload) => {
+        return {
+          ...state,
+          user: payload
+        }
+      }
     },
     extraReducers: {
       [signup.pending]: (state, action) => {
@@ -40,5 +46,5 @@ export const authSlice = createSlice({
       }    
 });
 
-export const {setBookmarks} =  authSlice.actions;
+export const {setBookmarks,setUser} =  authSlice.actions;
 export default authSlice.reducer;

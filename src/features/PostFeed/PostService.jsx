@@ -79,6 +79,21 @@ export const dislikePost = createAsyncThunk(
     }
 })
 
+export const editPost = createAsyncThunk('posts/editPost',async(editPostData,thunkAPI)=> {   
+    const {postData,postId} = editPostData;
+    console.log(" post id "+postId+" Post Data "+postData);
+    try {
+        await axios.post(`/api/posts/edit/${postId}`,{postData},{headers: {
+            'Content-Type': 'application/json',
+             'authorization': getCookie(tokenKey)
+            }}).then(result=>{
+                thunkAPI.dispatch(setPosts(result.data.posts))
+            })
+    } catch(err) {
+        console.log(err);
+    }
+})
+
 export const getPosts = createAsyncThunk(
     'posts/getPosts',async(_,thunkAPI)=> {   
      await axios.get('/api/posts',{headers: {

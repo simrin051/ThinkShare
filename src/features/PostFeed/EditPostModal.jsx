@@ -1,19 +1,34 @@
 import {
-  Button, Checkbox, EditableTextarea,Editable,EditablePreview, Modal, ModalBody,
-  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure
+  Button,
+  Editable, EditablePreview, EditableTextarea, Modal, ModalBody,
+  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useDisclosure
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchPostById } from './PostService';
+import { editPost } from './PostService';
 
 export const EditPostModal= ({postData,isOpen,setEditModal,editModal}) => {
  const { _id,username,content} = postData;
  const {  onOpen, onClose } = useDisclosure();
+ const dispatch = useDispatch();
+ let updating = false; 
+ let inputValue = "";
+
  function onCloseFunc() {
   onClose();
   setEditModal(false);
 }
 
+function updatePost() {
+  dispatch(editPost({postId: postData._id,postData: inputValue}));
+  setEditModal(false);
+}
+
+
+let handleInputChange = (e) => {
+  inputValue = e.target.value;
+ // setEditMode(true)
+  updating = true;
+ }
 
  return (
  <Modal isOpen={editModal} onClose={onCloseFunc}>
@@ -21,15 +36,14 @@ export const EditPostModal= ({postData,isOpen,setEditModal,editModal}) => {
     <ModalContent>
       <ModalHeader>Edit Post</ModalHeader>
       <ModalCloseButton />
-      {/**<Editable defaultValue='Take some chakra'>
-<EditablePreview />
-<EditableTextarea />
-</Editable> **/}
       <ModalBody>
-        {/*postData.username*/}
-        {content}
+      <Textarea defaultValue={postData.content} onChange={()=>handleInputChange}/>
       </ModalBody>
-     </ModalContent>
+      <ModalFooter>
+      <Button colorScheme='blue' mr={3} onClick={updatePost}>Post</Button>
+      <Button colorScheme='blue' mr={3} onClick={onCloseFunc}>Cancel</Button>
+      </ModalFooter>
+    </ModalContent>
   </Modal> 
  )
 }

@@ -38,7 +38,7 @@ export const users = [
     password: "narendraModi123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    profilePhoto: "https://res.cloudinary.com/diirhxtse/image/upload/v1657112051/ThinkShare/Narendra_Modi.jpg",
+    profilePhoto: "https://res.cloudinary.com/diirhxtse/image/upload/v1657112051/ThinkShare/Narendra_Modi.jpg", 
     bio: "Narendra Damodardas Modi is an Indian politician serving as the 14th and current prime minister of India since 2014. Modi was the chief minister of Gujarat from 2001 to 2014 and is the Member of Parliament from Varanasi.",
     portfolioUrl: "https://www.narendramodi.in/"
   },
@@ -46,7 +46,7 @@ export const users = [
     _id: uuid(),
     firstName: "Malvika",
     lastName: "Iyer",
-    username: "MalvikaIyer",
+    username: "simrin",
     password: "malvikaIyer",
     createdAt: formatDate(),
     updatedAt: formatDate(),

@@ -45,6 +45,9 @@ export const Post = ({postData}) => {
         dispatch(addBookmark(postData._id));
     }
 
+    const ref = useRef()
+    useClickOutside(ref,()=>setDisplayMenuIcon(true));
+
     return(
         <div class="post"> 
               <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
@@ -53,7 +56,7 @@ export const Post = ({postData}) => {
               {menuIcon && <div class="post-menu-icon-container" onClick={()=>{setDisplayMenuIcon(!menuIcon)}}>
                 <i class="post-menu-icon fa fa-ellipsis"></i>
               </div>}
-               {!menuIcon && <PostDropdown postData={postData} menuIcon={menuIcon} setDisplayMenuIcon={setDisplayMenuIcon} setEditModal={setEditModal} class="post-dropdown" id="post-dropdown"/>}
+               {!menuIcon && <PostDropdown ref={ref} postData={postData} menuIcon={menuIcon} setDisplayMenuIcon={setDisplayMenuIcon} setEditModal={setEditModal} class="post-dropdown" id="post-dropdown"/>}
                 <div class="postContent">
                     {postData.content}
                     <div class="post-icons">

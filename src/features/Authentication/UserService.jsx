@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setBookmarks } from "./AuthenticationSlice";
+import { setBookmarks, setUser } from "./AuthenticationSlice";
 
 export const getBookMarks = createAsyncThunk("bookmarks/getBookmarks",async (body,thunkAPI)=>{
     try {
@@ -13,15 +13,19 @@ export const getBookMarks = createAsyncThunk("bookmarks/getBookmarks",async (bod
     }
 })
 
-export const getUser = createAsyncThunk("user/getUser",async (userId,{thunkAPI, rejectWithValue })=>{
+export const getUser = createAsyncThunk("user/getUser",async (username,thunkAPI)=>{
   try {
-    await axios.get(`/api/users/${userId}`,{headers: {
+    console.log(" get user  *******************"+username);
+    console.log(" username "+username);
+    await axios.get(`/api/users/${username}`,{headers: {
       'Content-Type': 'application/json',
       }})
       .then(res=>{
+        console.log(" Result "+JSON.stringify(res));
+        thunkAPI.dispatch(setUser(res.data))
         });
     } catch(err) {
-      console.log(err);
-      return rejectWithValue(err.statusText);
+      console.log(" Error "+err);
+      return thunkAPI.rejectWithValue(err.statusText);
     }
 })

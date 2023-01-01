@@ -4,3 +4,7 @@
     float: right;
     margin-top: 1em;
 }
+
+.chakra-modal__body .chakra-textarea{
+    height: 30rem;
+}
