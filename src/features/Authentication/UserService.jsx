@@ -28,3 +28,18 @@ export const getUser = createAsyncThunk("user/getUser",async (username,thunkAPI)
       return thunkAPI.rejectWithValue(err.statusText);
     }
 })
+
+export const updateUserDetails = createAsyncThunk("user/updateUser",async (userData,thunkAPI)=>{
+  try {
+    await axios.get(`/api/users/edit`,{userData},{headers: {
+      'Content-Type': 'application/json',
+      }})
+      .then(res=>{
+        console.log(" response data "+JSON.stringify(res));
+        thunkAPI.dispatch(setUser(res.data))
+        });
+    } catch(err) {
+      console.log(" Error "+err);
+      return thunkAPI.rejectWithValue(err.statusText);
+    }
+})

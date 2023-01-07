@@ -45,6 +45,6 @@ export const Profile = () => {
             </div>
         </div>       
     </div>}
-   { editProfile && <EditProfileModal userData={user} openEditProfileDialog={editProfile}/>   } 
+   { editProfile && <EditProfileModal userData={user} setEditProfile={setEditProfile} openEditProfileDialog={editProfile}/>   } 
     <FollowRequests/></div>)
 }

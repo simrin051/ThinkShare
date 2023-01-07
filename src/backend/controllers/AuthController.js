@@ -42,6 +42,9 @@ export const signupHandler = function (schema, request) {
       followers: [],
       following: [],
       bookmarks: [],
+      profilePhoto: "",
+      bio: "",
+      websiteUrl: ""
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign(
