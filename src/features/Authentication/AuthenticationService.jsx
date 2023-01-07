@@ -12,9 +12,11 @@ export const signup =  createAsyncThunk("auth/signup",async ( {firstName, lastNa
         encodedToken: res.data.encodedToken,
         username: username
       }
+      console.log(" inside auth service username "+username);
       setAuthCookies(cookieObj);
     });
   } catch(err) {
+    console.log(err);
     return rejectWithValue(err.statusText);
   }
 })

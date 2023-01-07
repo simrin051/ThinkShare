@@ -15,13 +15,12 @@ export const getBookMarks = createAsyncThunk("bookmarks/getBookmarks",async (bod
 
 export const getUser = createAsyncThunk("user/getUser",async (username,thunkAPI)=>{
   try {
-    console.log(" get user  *******************"+username);
     console.log(" username "+username);
     await axios.get(`/api/users/${username}`,{headers: {
       'Content-Type': 'application/json',
       }})
       .then(res=>{
-        console.log(" Result "+JSON.stringify(res));
+        console.log(" response data "+JSON.stringify(res));
         thunkAPI.dispatch(setUser(res.data))
         });
     } catch(err) {

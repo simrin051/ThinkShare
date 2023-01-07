@@ -293,7 +293,6 @@ export const deletePostHandler = function (schema, request) {
       );
     }
     this.db.posts.remove({ _id: postId });
-    console.log("after delete "+this.db.posts);
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
