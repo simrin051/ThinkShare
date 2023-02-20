@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../PostFeed/PostService';
   
   export const SignupDialog = ({ openSignupDialog, setOpenSignupDialog }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    let errorInSignUpForm = false;
     const dispatch = useDispatch();
     const initialState = {
       firstName: "",
@@ -36,41 +36,43 @@ import { getPosts } from '../../PostFeed/PostService';
     }
     const navigate = useNavigate();
     const createNewAccount =  () => {
-      checkFormValidity();
-       dispatch(signup(formState))
+      if(!isFormInvalid()) { 
+      dispatch(signup(formState))
        .then(() => {
         navigate('/home');
       });
-      }
+    }
+    }
 
-    
     const validateEmail = (mail) => {
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-       {
-         return (true)
-       }
-         return (false)
+         return true; 
+      return false;
      }
 
-    const checkFormValidity = () => {
+    const isFormInvalid = () => {
       if(!validateEmail(formState.email)) {
-        return formDispatch({
+        errorInSignUpForm = true;
+         formDispatch({
           type: "EMAIL_ERROR",
           payload: ERROR_EMAIL_FORMAT
         })
       }
       if(formState.password.length<MIN_PWD_LENGTH) {
-        return formDispatch({
+        errorInSignUpForm = true;
+         formDispatch({
           type: "SET_PWD_LENGTH_ERR",
           payload: ERROR_MIN_PWD
         })
       }
       if(formState.password!=formState.cpassword) {
-        return formDispatch({
+        errorInSignUpForm = true;
+         formDispatch({
           type: "SET_PWD_CPWD_MISMATCH",
           payload: ERR_MISMATCH_PWD
         })
-      }  
+      }
+      return errorInSignUpForm;  
     }
 
     return (

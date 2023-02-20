@@ -43,3 +43,18 @@ export const updateUserDetails = createAsyncThunk("user/updateUser",async (userD
       return thunkAPI.rejectWithValue(err.statusText);
     }
 })
+
+export const updateFollower = createAsyncThunk("user/updateFollower",async (followUserId,thunkAPI)=>{
+  try {
+    await axios.get(`/api/users/follow/${followUserId}/`,{headers: {
+      'Content-Type': 'application/json',
+      }})
+      .then(res=>{
+        console.log(" response data "+JSON.stringify(res));
+        thunkAPI.dispatch(setUser(res.data))
+        });
+    } catch(err) {
+      console.log(" Error "+err);
+      return thunkAPI.rejectWithValue(err.statusText);
+    }
+})

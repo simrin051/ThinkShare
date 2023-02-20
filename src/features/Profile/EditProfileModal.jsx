@@ -35,7 +35,7 @@ export const EditProfileModal = ({ userData, openEditProfileDialog,setEditProfil
             <ModalOverlay />
             <ModalContent>
                 <ModalCloseButton />
-                <ModalBody>
+                <ModalBody class="editProfileBody">
                     <div class="profile-img-background"></div>
                     <div class="profile-img">
                         <img id="profileimg" src={userData.profilePhoto ? userData.profilePhoto : userIcon} />
