@@ -81,9 +81,8 @@ export const loginHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: 
+            "The username you entered is not Registered. Not Found error"
         }
       );
     }

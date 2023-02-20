@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useReducer } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TextField } from '../../../app/components/TextField';
 import { ErrorTextField } from '../../../app/components/ValidationMessage';
@@ -19,6 +19,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
     passwordErr: "",
     apiError: ""
   }
+  const auth = useSelector(state => state.auth)
 
   const [formState, formDispatch] = useReducer(formsReducer, initialState);
 
@@ -32,10 +33,22 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
 
   const navigate = useNavigate();
   const loginAccount = async () => {
-   const  res = await dispatch(signin(formState))
-   .then(() => {
+   const res = await dispatch(signin(formState));
+   if(res.rejectedWithValue==false) {
     navigate('/home');
-  });
+   } else {
+    formDispatch({
+      type: "SET_API_ERROR",
+      payload: INCORRECT_LOGIN_CREDENTIALS
+    })
+   }
+
+   if(!auth.error) {
+    //
+   }
+   /*.then(() => {
+   
+    })
    
     if(res.meta.requestStatus=="rejected") {
       formDispatch({
@@ -43,12 +56,14 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
         payload: INCORRECT_LOGIN_CREDENTIALS
       })
     }
+    */
   }
 
   const loginGuestAccount = async () => {
     formState.username = "testuser";
     formState.password = "testpassword";
     const  res = await dispatch(signin(formState))
+    /*
     .then(() => {
       navigate('/home');
     });
@@ -57,7 +72,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
         type: "SET_API_ERROR",
         payload: INCORRECT_LOGIN_CREDENTIALS
       })
-    }
+    } */
 
   }
 
@@ -70,7 +85,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
         <ModalBody>
           <TextField label="Username" type="text"  onChange={(e)=>formDispatch({type: 'SET_LOGIN_USERNAME', payload: e.target.value})} />
           <TextField label="Password" placeholder="******" type="password"  onChange={(e)=>formDispatch({type: 'SET_LOGIN_PASSWORD', payload: e.target.value})}  />
-          {formState && formState.apiError && <ErrorTextField text={formState.apiError}></ErrorTextField>}
+          {formState.apiError && <ErrorTextField text={formState.apiError}></ErrorTextField>}
           <Checkbox>Remember me</Checkbox>
         </ModalBody>
         <ModalFooter>

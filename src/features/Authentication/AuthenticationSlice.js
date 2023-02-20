@@ -38,10 +38,12 @@ export const authSlice = createSlice({
       [signup.rejected]: (state, action) => {
       },
       [signin.pending]: (state, action) => {
+  
       },
       [signin.fulfilled]: (state, action) => {
       },
       [signin.rejected]: (state, action) => {
+        state.error = action.payload;
       }
       }    
 });

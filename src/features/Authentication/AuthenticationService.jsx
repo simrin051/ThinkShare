@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { setAuthCookies } from "../../utils/AuthCookies";
-import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,ERROR_EMAIL_FORMAT } from "../../utils/constants";
+import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,ERROR_EMAIL_FORMAT,INCORRECT_LOGIN_CREDENTIALS } from "../../utils/constants";
 
 export const signup =  createAsyncThunk("auth/signup",async ( {firstName, lastName, username, password},{ rejectWithValue })=>{
   try {
@@ -12,11 +12,9 @@ export const signup =  createAsyncThunk("auth/signup",async ( {firstName, lastNa
         encodedToken: res.data.encodedToken,
         username: username
       }
-      console.log(" inside auth service username "+username);
       setAuthCookies(cookieObj);
     });
   } catch(err) {
-    console.log(err);
     return rejectWithValue(err.statusText);
   }
 })
@@ -26,8 +24,9 @@ export const signin = createAsyncThunk("auth/signin",async (body,{ rejectWithVal
     await axios.post(`/api/auth/login`,(body),{headers: {
       'Content-Type': 'application/json',
       }});
-    } catch(err) {
-      return rejectWithValue(err.statusText);
+    } catch({response}) {
+      const {errors} = response.data;
+      return rejectWithValue(errors);
     }
 })
 
@@ -91,6 +90,10 @@ export const formsReducer = (state, { type, payload }) => {
      case 'EMAIL_ERROR': return {
       ...state,
       emailErr: ERROR_EMAIL_FORMAT
+     }
+     case 'SET_API_ERROR': return {
+      ...state,
+      apiError: INCORRECT_LOGIN_CREDENTIALS
      } 
       default:
           break;
