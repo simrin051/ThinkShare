@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TextField } from '../../../app/components/TextField';
 import { ErrorTextField } from '../../../app/components/ValidationMessage';
+import { setAuthCookiesForTestUser } from '../../../utils/AuthCookies';
 import { ERROR_MIN_PWD,MIN_PWD_LENGTH ,INCORRECT_LOGIN_CREDENTIALS} from '../../../utils/constants';
 import { errorReducer, formsReducer, signin } from '../AuthenticationService';
 
@@ -19,7 +20,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
     passwordErr: "",
     apiError: ""
   }
-  const auth = useSelector(state => state.auth)
+  const error = useSelector((state) => {return state.auth.error})
 
   const [formState, formDispatch] = useReducer(formsReducer, initialState);
 
@@ -32,48 +33,38 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
   }
 
   const navigate = useNavigate();
-  const loginAccount = async () => {
-   const res = await dispatch(signin(formState));
-   if(res.rejectedWithValue==false) {
-   // navigate('/home');
-   } else {
+  const loginAccount = () => {
+   dispatch(signin(formState))
+  .unwrap()
+   .then(()=>{
+    navigate('/home');
+  })
+  .catch((error)=>{
+    const {status} = error.response;
+    if(status==401) {
     formDispatch({
-      type: "SET_API_ERROR",
+      type: "SET_UNAUTHORIZED_ERROR",
       payload: INCORRECT_LOGIN_CREDENTIALS
     })
-   }
-
-   if(!auth.error) {
-    //
-   }
-   /*.then(() => {
-   
-    })
-   
-    if(res.meta.requestStatus=="rejected") {
-      formDispatch({
-        type: "SET_API_ERROR",
-        payload: INCORRECT_LOGIN_CREDENTIALS
-      })
     }
-    */
+  })
   }
 
   const loginGuestAccount = async () => {
+   
     formState.username = "testuser";
     formState.password = "testpassword";
+
     const  res = await dispatch(signin(formState))
-    /*
     .then(() => {
       navigate('/home');
-    });
-    if(res.meta.requestStatus=="rejected") {
+    })
+    .catch((error)=>{
       formDispatch({
         type: "SET_API_ERROR",
         payload: INCORRECT_LOGIN_CREDENTIALS
       })
-    } */
-
+    });
   }
 
   return (
@@ -85,7 +76,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
         <ModalBody>
           <TextField label="Username" type="text"  onChange={(e)=>formDispatch({type: 'SET_LOGIN_USERNAME', payload: e.target.value})} />
           <TextField label="Password" placeholder="******" type="password"  onChange={(e)=>formDispatch({type: 'SET_LOGIN_PASSWORD', payload: e.target.value})}  />
-          {formState.apiError && <ErrorTextField text={formState.apiError}></ErrorTextField>}
+          {formState && formState.apiError && <ErrorTextField text={formState.apiError}></ErrorTextField>}
           <Checkbox>Remember me</Checkbox>
         </ModalBody>
         <ModalFooter>

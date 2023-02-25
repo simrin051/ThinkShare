@@ -1,24 +1,18 @@
-import { NavBar } from '../NavBar/NavBar';
-import { FollowRequests } from '../FollowRequests/FollowRequests';
-import './Profile.css';
-import { EditProfileModal } from './EditProfileModal';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { getCookie } from '../../utils/AuthCookies';
-import { getUser } from '../Authentication/UserService';
-import { userNameKey } from '../../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import userIcon from '../../assets/UserIcon.jpg';
+import { FollowRequests } from '../FollowRequests/FollowRequests';
+import { NavBar } from '../NavBar/NavBar';
+import { EditProfileModal } from './EditProfileModal';
+import './Profile.css';
 
 export const Profile = () => {
     const [editProfile,setEditProfile] = useState(false)
 
-    let { payload }= useSelector((state) => {
-        console.log(" state "+JSON.stringify(state));
+    let user = useSelector((state) => {
         return state.auth.user;
     }) 
   
-    const {user} = payload;
     const openEditModal= () => {
         setEditProfile(true);
     }

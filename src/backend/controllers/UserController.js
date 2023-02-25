@@ -23,6 +23,7 @@ export const getUserHandler = function (schema, request) {
   const username = request.params.username;
   try {
     const user = schema.users.findBy({ username }).attrs;
+    console.log(" check for test user "+JSON.stringify(user));
     return new Response(200, {}, { user });
   } catch (error) {
     return new Response(

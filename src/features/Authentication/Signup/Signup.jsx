@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
   import { TextField } from '../../../app/components/TextField';
 import { errorReducer, formsReducer, signup } from '../AuthenticationService';
 import { useReducer } from 'react';
-import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,MIN_PWD_LENGTH,ERROR_EMAIL_FORMAT } from '../../../utils/constants';
+import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,MIN_PWD_LENGTH,ERROR_EMAIL_FORMAT, USER_ALREADY_EXISTS } from '../../../utils/constants';
 import { ErrorTextField } from '../../../app/components/ValidationMessage';
 import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../PostFeed/PostService';
@@ -38,8 +38,20 @@ import { getPosts } from '../../PostFeed/PostService';
     const createNewAccount =  () => {
       if(!isFormInvalid()) { 
       dispatch(signup(formState))
+      .unwrap()
        .then(() => {
         navigate('/home');
+      })
+      .catch((error)=>{
+        console.log(error);
+        const {status} = error.response;
+        console.log( " error response status "+(error.response.status));
+        if(status == 422) {
+          formDispatch({
+            type: "SET_USER_ALREADY_EXISTS_ERROR",
+            payload: USER_ALREADY_EXISTS
+          })
+        }
       });
     }
     }
@@ -91,7 +103,8 @@ import { getPosts } from '../../PostFeed/PostService';
             {formState && formState.passwordErr && <ErrorTextField text={formState.passwordErr}></ErrorTextField>}           
             <TextField label="Confirm Password" placeholder="******" type="password" onChange={(e)=>{formDispatch({type: 'SET_CPASSWORD',payload: e.target.value})}} onFocus={(e)=>formDispatch({type:'CLEAR_CPASSWORDERR'})}/>
             {formState && formState.cpasswordErr && <ErrorTextField text={formState.cpasswordErr}></ErrorTextField>}
-           </ModalBody>
+            {formState && formState.apiError && <ErrorTextField text={formState.apiError}></ErrorTextField>}
+            </ModalBody>
           <ModalFooter>
             <Button  colorScheme='blue' onClick={createNewAccount}>Create new account</Button>
           </ModalFooter>

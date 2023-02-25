@@ -1,3 +1,4 @@
+import { CollectionsBookmarkRounded } from '@mui/icons-material';
 import { createSlice } from '@reduxjs/toolkit'
 import { Navigate, useNavigate } from 'react-router-dom';
 import { INCORRECT_LOGIN_CREDENTIALS } from '../../utils/constants';
@@ -22,18 +23,19 @@ export const authSlice = createSlice({
        ...state, 
        bookmarks :payload
       }},
-      setUser: (state,payload) => {
-        return {
+      setUser: (state,user) => {
+        return  {
           ...state,
-          user: payload
-        }
+          user: user
+        }  
       }
     },
     extraReducers: {
       [signup.pending]: (state, action) => {
       },
       [signup.fulfilled]: (state, action) => {
-    
+        console.log(" action payload "+JSON.stringify(action.payload));
+        setUser(state,action.payload);
       },
       [signup.rejected]: (state, action) => {
       },
@@ -41,9 +43,12 @@ export const authSlice = createSlice({
   
       },
       [signin.fulfilled]: (state, action) => {
+        console.log(" action payload for sign in fulfilled "+JSON.stringify(action.payload));
+        state.error = "";
+        setUser(state,action.payload);
       },
       [signin.rejected]: (state, action) => {
-        state.error = action.payload;
+      
       }
       }    
 });

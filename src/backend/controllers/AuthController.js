@@ -72,10 +72,13 @@ export const signupHandler = function (schema, request) {
 export const loginHandler = function (schema, request) {
   const { username, password } = JSON.parse(request.requestBody);
   try {
+    console.log(" username "+username+" password "+password)
     if(username == "testuser" && password == "testpassword") {
       return new Response(200, {}, {});
     }
+    console.log(" username "+username);
     const foundUser = schema.users.findBy({ username: username });
+    console.log(" found user "+foundUser);
     if (!foundUser) {
       return new Response(
         404,
@@ -86,11 +89,14 @@ export const loginHandler = function (schema, request) {
         }
       );
     }
+    console.log(" password "+password);
+    console.log(" found user password "+foundUser.password);
     if (password === foundUser.password) {
       const encodedToken = sign(
         { _id: foundUser._id, username },
         process.env.REACT_APP_JWT_SECRET
       );
+      console.log(" encoded token "+encodedToken);
       return new Response(200, {}, { foundUser, encodedToken });
     }
     return new Response(
@@ -103,6 +109,7 @@ export const loginHandler = function (schema, request) {
       }
     );
   } catch (error) {
+    console.log(" error in login "+error)
     return new Response(
       500,
       {},

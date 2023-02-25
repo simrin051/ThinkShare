@@ -20,11 +20,9 @@ export const getUser = createAsyncThunk("user/getUser",async (username,thunkAPI)
       'Content-Type': 'application/json',
       }})
       .then(res=>{
-        console.log(" response data "+JSON.stringify(res));
         thunkAPI.dispatch(setUser(res.data))
         });
     } catch(err) {
-      console.log(" Error "+err);
       return thunkAPI.rejectWithValue(err.statusText);
     }
 })
