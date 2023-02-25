@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCookie } from "../../utils/AuthCookies";
 import { tokenKey } from "../../utils/constants";
-import { setPosts } from "./PostSlice";
+import { setPosts } from "./postSlice";
 
 export const fetchPostById = createAsyncThunk(
     'posts/fetchPostById',

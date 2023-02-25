@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useClickOutside from '../../app/customhooks/useClickOutside';
 import { Post } from './Post';
 import './PostFeed.css';
-import { setPosts } from './PostSlice';
+import { setPosts } from './postSlice';
 
 
 

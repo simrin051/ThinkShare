@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { API_URL } from '../../utils/constants';
-import axios from 'axios';
+
+import { createSlice } from '@reduxjs/toolkit';
 import { createPost, deletePost, fetchPostById, getPosts, likePost } from './PostService';
 import { addBookmark } from './BookMarkService';
 

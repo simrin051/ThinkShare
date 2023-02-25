@@ -35,7 +35,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
   const loginAccount = async () => {
    const res = await dispatch(signin(formState));
    if(res.rejectedWithValue==false) {
-    navigate('/home');
+   // navigate('/home');
    } else {
     formDispatch({
       type: "SET_API_ERROR",
