@@ -27,9 +27,10 @@ export const getUser = createAsyncThunk("user/getUser",async (username,thunkAPI)
     }
 })
 
-export const updateUserDetails = createAsyncThunk("user/updateUser",async (userData,thunkAPI)=>{
+export const updateUser = createAsyncThunk("user/updateUser",async (userData,thunkAPI)=>{
   try {
-    await axios.get(`/api/users/edit`,{userData},{headers: {
+    console.log(" user data "+JSON.stringify(userData));
+    await axios.post(`/api/users/edit`,userData,{headers: {
       'Content-Type': 'application/json',
       }})
       .then(res=>{
@@ -38,7 +39,7 @@ export const updateUserDetails = createAsyncThunk("user/updateUser",async (userD
         });
     } catch(err) {
       console.log(" Error "+err);
-      return thunkAPI.rejectWithValue(err.statusText);
+      return thunkAPI.rejectWithValue(err);
     }
 })
 

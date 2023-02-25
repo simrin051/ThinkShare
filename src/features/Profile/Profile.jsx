@@ -9,16 +9,17 @@ import './Profile.css';
 export const Profile = () => {
     const [editProfile,setEditProfile] = useState(false)
 
-    let user = useSelector((state) => {
+    let userData = useSelector((state) => {
         return state.auth.user;
-    }) 
+    })
+    console.log(" user data in profile "+JSON.stringify(userData)); 
+    const user = userData.payload.user;
   
     const openEditModal= () => {
         setEditProfile(true);
     }
 
     return(<div class="profile-container"><NavBar/>
-    {console.log(" user "+JSON.stringify(user))}
     { <div class="profile-body">
         <div class="profile-img-container">
             <div class="profile-img-background"></div>
@@ -39,6 +40,6 @@ export const Profile = () => {
             </div>
         </div>       
     </div>}
-   { editProfile && <EditProfileModal userData={user} setEditProfile={setEditProfile} openEditProfileDialog={editProfile}/>   } 
+   { editProfile && <EditProfileModal user={user} setEditProfile={setEditProfile} openEditProfileDialog={editProfile}/>   } 
     <FollowRequests/></div>)
 }
