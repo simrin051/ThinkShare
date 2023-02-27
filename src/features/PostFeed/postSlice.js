@@ -12,7 +12,7 @@ export const postSlice = createSlice({
     },
     reducers: {
         setPosts: (state,{payload}) =>{ 
-            console.log(" payload "+payload[0].likes.likeCount);            
+         //   console.log(" payload "+payload[0].likes.likeCount);            
             return  {
                posts : payload
                //.length>=payload.length?payload:state.posts.concat(payload)

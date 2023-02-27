@@ -18,8 +18,6 @@ export const fetchPostById = createAsyncThunk(
     }
 )
 
-
-
 export const createPost = createAsyncThunk(
     "posts/createPost",
     async (postData,thunkAPI) => {
@@ -81,6 +79,7 @@ export const dislikePost = createAsyncThunk(
 
 export const editPost = createAsyncThunk('posts/editPost',async(editPostData,thunkAPI)=> {   
     const {postData,postId} = editPostData;
+    console.log(" inside post service ");
     console.log(" post id "+postId+" Post Data "+postData);
     try {
         await axios.post(`/api/posts/edit/${postId}`,{postData},{headers: {

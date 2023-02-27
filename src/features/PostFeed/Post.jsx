@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useClickOutside from '../../app/customhooks/useClickOutside';
-import { getCookie } from '../../utils/AuthCookies';
+import { getCookie, loggedInUserName } from '../../utils/AuthCookies';
 import { userNameKey } from '../../utils/constants';
 import { addBookmark } from './BookMarkService';
 import { CommentModal } from './CommentModal';
@@ -16,7 +16,7 @@ export const Post = ({postData}) => {
     const [menuIcon, setDisplayMenuIcon] = useState(true);
     const [commentModal, setCommentModal] = useState(false);
     const [ editModal,setEditModal] = useState(false);
-    
+    console.log(loggedInUserName());
     const dispatch = useDispatch();
     
     const reactPost = ({_id,likes}) => {
@@ -26,6 +26,10 @@ export const Post = ({postData}) => {
         else {
             dispatch(likePost(_id))
         } 
+    }
+
+    const isPostSharedByUserLoggedIn = () => {
+        return (postData.username==loggedInUserName())?true:false;
     }
 
     const isPostLikedByUser = (likedByData,username) => {
@@ -53,10 +57,10 @@ export const Post = ({postData}) => {
               <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
               <span class="username">{postData.username}</span> 
               <span class="postTime">{postData.createdAt}</span>
-              {menuIcon && <div class="post-menu-icon-container" onClick={()=>{setDisplayMenuIcon(!menuIcon)}}>
+              {menuIcon && isPostSharedByUserLoggedIn() &&  <div class="post-menu-icon-container" onClick={()=>{setDisplayMenuIcon(!menuIcon)}}>
                 <i class="post-menu-icon fa fa-ellipsis"></i>
               </div>}
-               {!menuIcon && <PostDropdown ref={ref} postData={postData} menuIcon={menuIcon} setDisplayMenuIcon={setDisplayMenuIcon} setEditModal={setEditModal} class="post-dropdown" id="post-dropdown"/>}
+               {!menuIcon  && <PostDropdown ref={ref} postData={postData} menuIcon={menuIcon} setDisplayMenuIcon={setDisplayMenuIcon} setEditModal={setEditModal} class="post-dropdown" id="post-dropdown"/>}
                 <div class="postContent">
                     {postData.content}
                     <div class="post-icons">

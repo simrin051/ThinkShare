@@ -1,11 +1,8 @@
-import './PostDropdown.css';
-import React, {useRef, useState} from "react";
-import { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { deletePost } from './PostService';
-import { EditPostModal } from './EditPostModal';
-import { Link } from 'react-router-dom';
 import useClickOutside from '../../app/customhooks/useClickOutside';
+import './PostDropdown.css';
+import { deletePost } from './PostService';
 export const PostDropdown =  React.forwardRef((props, ref) => {
    
     const {postData,setDisplayMenuIcon,setEditModal} = props;
@@ -13,9 +10,8 @@ export const PostDropdown =  React.forwardRef((props, ref) => {
     
     const dispatch = useDispatch();
 
-    useClickOutside(ref,()=>setDisplayMenuIcon(true));
+    //useClickOutside(ref,()=>setDisplayMenuIcon(true));
   
-
     useEffect(() => {
       const handleClickOutside = (event) => {
           if (ref && ref.current && !ref.current.contains(event.target)) {

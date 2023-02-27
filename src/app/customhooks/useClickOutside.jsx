@@ -9,12 +9,12 @@ export default function useClickOutside(ref,handler) {
             }
             
         };
-        document.addEventListener('click',listener)
+       // document.addEventListener('click',listener)
        // document.addEventListener('mousedown',listener)
         //document.addEventListener('touchstart',listener)
         
         return()=>{
-          document.removeEventListener('click',listener)
+     //     document.removeEventListener('click',listener)
           // document.removeEventListener('mousedown',listener)
        //     document.removeEventListener('touchstart',listener)
         }

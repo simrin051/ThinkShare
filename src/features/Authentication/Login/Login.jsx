@@ -40,6 +40,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
     navigate('/home');
   })
   .catch((error)=>{
+    console.log(error);
     const {status} = error.response;
     if(status==401) {
     formDispatch({

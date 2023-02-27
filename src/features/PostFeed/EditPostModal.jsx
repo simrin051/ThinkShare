@@ -11,21 +11,23 @@ export const EditPostModal= ({postData,isOpen,setEditModal,editModal}) => {
  const {  onOpen, onClose } = useDisclosure();
  const dispatch = useDispatch();
  let updating = false; 
- let inputValue = "";
+ var inputValue = "";
 
  function onCloseFunc() {
   onClose();
   setEditModal(false);
 }
 
-function updatePost() {
+const updatePost = () => {
   dispatch(editPost({postId: postData._id,postData: inputValue}));
   setEditModal(false);
 }
 
 
-let handleInputChange = (e) => {
+ const handleInputChange = (e) => {
+  console.log(" inside handle input change");
   inputValue = e.target.value;
+  console.log(" input value "+inputValue);
  // setEditMode(true)
   updating = true;
  }
@@ -37,7 +39,7 @@ let handleInputChange = (e) => {
       <ModalHeader>Edit Post</ModalHeader>
       <ModalCloseButton />
       <ModalBody>
-      <Textarea defaultValue={postData.content} onChange={()=>handleInputChange}/>
+      <Textarea defaultValue={postData.content} onChange={(e)=>handleInputChange(e)}/>
       </ModalBody>
       <ModalFooter>
       <Button colorScheme='blue' mr={3} onClick={updatePost}>Post</Button>

@@ -1,7 +1,7 @@
 import { CollectionsBookmarkRounded } from '@mui/icons-material';
 import { createSlice } from '@reduxjs/toolkit'
 import { Navigate, useNavigate } from 'react-router-dom';
-import { setAuthCookies, setAuthorizationHeaders } from '../../utils/AuthCookies';
+import { setAuthCookies, setAuthorizationHeaders, setLoggedInUser } from '../../utils/AuthCookies';
 import { INCORRECT_LOGIN_CREDENTIALS } from '../../utils/constants';
 import { Navigation } from '../../utils/Navigation';
 import { signup,signin} from './AuthenticationService';
@@ -39,6 +39,7 @@ export const authSlice = createSlice({
         state.user = action.payload.user;
         setAuthCookies({encodedToken: state.token,username: state.user.username});
         setAuthorizationHeaders();
+        setLoggedInUser(state.user);
       },
       [signup.rejected]: (state, action) => {
       },
@@ -51,6 +52,7 @@ export const authSlice = createSlice({
         state.user = action.payload.user;
         setAuthCookies({encodedToken: state.token,username: state.user.username});
         setAuthorizationHeaders();
+        setLoggedInUser(state.user);
       },
       [signin.rejected]: (state, action) => {
       

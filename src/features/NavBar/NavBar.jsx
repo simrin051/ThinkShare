@@ -62,8 +62,8 @@ export const NavBar = () => {
     return (<div class="navbar-container">
         <div class="logo"><img src={logo} class="logo-icon" /></div>
         <ul class="sidebar-nav-links">
-            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-house"></i>Home</li>
-            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-hashtag"></i>Explore</li>
+            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-house"></i><Link to="/home">Home</Link></li>
+            <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-hashtag"></i><Link to="/explore">Explore</Link></li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-bookmark"></i><Link to="/bookmarks">Bookmarks</Link></li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i><Link to="/profile">Profile</Link></li>
         </ul>
