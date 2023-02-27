@@ -47,7 +47,7 @@ export const EditProfileModal = ({ user, openEditProfileDialog, setEditProfile }
                 <ModalBody class="editProfileBody">
                     <div class="profile-img-background"></div>
                     <div class="profile-img">
-                        <img id="profileimg" src={user.profilePhoto ? user.profilePhoto : userIcon} />
+                        <img id="profileimg" src={user.profilePhoto!=null ? user.profilePhoto : userIcon} />
                         <label for="upload-profileimg">
                             <div class="profile-img-upload-btn">
                                 <i class="fa-solid fa-arrow-up-from-bracket"></i>

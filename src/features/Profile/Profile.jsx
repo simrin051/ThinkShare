@@ -24,7 +24,7 @@ export const Profile = () => {
         <div class="profile-img-container">
             <div class="profile-img-background"></div>
             <div class="profile-img">
-               <img src={userIcon} alt="profile img not loading"/>
+               <img src={user.profilePhoto!=null?user.profilePhoto: userIcon} alt="profile img not loading"/>
             </div>
         
             <button class="fr mt-2 p-2 edit-btn"   onClick={()=>openEditModal()}>Edit Profile</button>
