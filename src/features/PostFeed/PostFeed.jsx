@@ -1,24 +1,29 @@
-import { useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useClickOutside from '../../app/customhooks/useClickOutside';
 import { Post } from './Post';
+import { ACTIONS } from '../posts/reducer/createPostFormReducer';
 import './PostFeed.css';
 import { setPosts } from './postSlice';
-import { useEffect } from 'react';
+import { postsReducer } from '../posts/reducer/createPostFormReducer';
+import { initialStateOfPostForm } from '../posts/reducer/createPostFormReducer';
+import { createPost } from './PostService';
+import { CircularProgressWithLabel } from '../../app/components/CircularProgressWithLabel';
+import { CircularProgress } from '@chakra-ui/react';
 
-
-
-const postButtonClicked = async () => {
-    console.log("post btn clicked");
-}
 
 export const PostFeed = () => {
+    const { SET_CONTENT } = ACTIONS;
+    const postMaxLength = 100;
     let posts = [];
     const ref = useRef();
     const [isOpen,setIsOpen] = useState(false);
   //  useClickOutside(ref,()=>setIsOpen(false));
+    const [postContentLength, setPostContentLength] = useState(0);
     const dispatch = useDispatch();
-
+    const [formState, formDispatch] = useReducer(
+        postsReducer,
+        initialStateOfPostForm,
+    );
     
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -55,7 +60,18 @@ const sortPostsBasedOnCreatedTime = () => {
     dispatch(setPosts(posts));
 }
 
+const postButtonClicked = async () => {
+    const postData = {
+        content: formState.content
+    }
+    dispatch(createPost(postData));
+    setPostContentLength(0);
+}
 
+const setTextCalculateProgress = (e) => {
+    setPostContentLength(e.target.value.length);
+    formDispatch({ type: SET_CONTENT, payload: e.target.value })
+}
 
     return(<div class="post-container">
         { isOpen==true && <div class="dropdown" ref={ref}>
@@ -64,9 +80,22 @@ const sortPostsBasedOnCreatedTime = () => {
         </div>}
         { isOpen==false && <i  class="fa-solid fa-bars menu-icon" onClick={()=>{setIsOpen(true)}}></i>}
         <img  class="image-container" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg"/>
-        <textarea class="postmodal-text-area" placeholder="What's happening">
+                    
+        <textarea class="postmodal-text-area" maxLength={postMaxLength} placeholder="What's happening" onChange={e=>setTextCalculateProgress(e)}>
         </textarea>
+        <div class="actions-footer">
+        {postContentLength>0 && (postMaxLength - postContentLength > 10) ? (
+                        <CircularProgress
+                            class="progress-icon"
+                            size="2rem"
+                            variant="determinate"
+                            value={Math.round((postContentLength * 100) / postMaxLength)}
+                        />
+                    ) : (
+                        postContentLength>0 && <CircularProgressWithLabel class="progress-icon" value={postMaxLength - postContentLength}>
+                        </CircularProgressWithLabel>)}
         <button class="share-btn" onClick={postButtonClicked} >Share</button>
+        </div>
         <div class="postfeed">
         {posts && posts.length>0 && posts.map((post) => {
             return <Post postData={post} />;

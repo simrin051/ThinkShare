@@ -64,3 +64,13 @@ textarea {
     right: 1rem;
     position: relative;
 }
+
+.actions-footer {
+    float: right;
+}
+
+.progress-icon {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-top: 5px;
+}
