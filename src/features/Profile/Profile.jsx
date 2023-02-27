@@ -13,7 +13,7 @@ export const Profile = () => {
         return state.auth.user;
     })
     console.log(" user data in profile "+JSON.stringify(userData)); 
-    const user = userData.payload.user;
+    const user = userData && userData.payload? userData.payload.user:null;
   
     const openEditModal= () => {
         setEditProfile(true);

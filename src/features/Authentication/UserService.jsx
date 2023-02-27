@@ -30,7 +30,7 @@ export const getUser = createAsyncThunk("user/getUser",async (username,thunkAPI)
 export const updateUser = createAsyncThunk("user/updateUser",async (userData,thunkAPI)=>{
   try {
     console.log(" user data "+JSON.stringify(userData));
-    await axios.post(`/api/users/edit`,userData,{headers: {
+    await axios.post(`/api/users/edit`,{userData: userData},{headers: {
       'Content-Type': 'application/json',
       }})
       .then(res=>{

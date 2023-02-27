@@ -1,34 +1,30 @@
+import { filter } from "@chakra-ui/react";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setAuthCookies } from "../../utils/AuthCookies";
+import { setAuthCookies, setAuthorizationHeaders } from "../../utils/AuthCookies";
 import { ERR_MISMATCH_PWD,ERROR_MIN_PWD,ERROR_EMAIL_FORMAT,INCORRECT_LOGIN_CREDENTIALS, USER_ALREADY_EXISTS } from "../../utils/constants";
 import { setUser } from "./AuthenticationSlice";
 
 export const signup =  createAsyncThunk("auth/signup",async ( {firstName, lastName, username, password},{ fulfillWithValue, rejectWithValue })=>{
   try {
-  await axios.post(`/api/auth/signup`,({firstName, lastName, username, password}),{headers: {
+  const res =  await axios.post(`/api/auth/signup`,({firstName, lastName, username, password}),{headers: {
     'Content-Type': 'application/json',
-    }}).then((res)=>{
-      let cookieObj = {
-        encodedToken: res.data.encodedToken,
-        username: username
-      }
-      console.log(" res data "+JSON.stringify(res.data.user));
-      setAuthCookies(cookieObj);
-      return fulfillWithValue(res.data);
-    });
+    }});
+    return {user: res.data.createdUser,encodedToken: res.data.encodedToken};
   } catch(err) {
     return rejectWithValue(err);
   }
 })
 
-export const signin = createAsyncThunk("auth/signin",async (body,thunkAPI)=>{
+export const signin = createAsyncThunk("auth/signin",async (body,{fulfillWithValue,rejectWithValue })=>{
     try {
-     const response =  await axios.post(`/api/auth/login`,(body),{headers: {
+   const res =  await axios.post(`/api/auth/login`,(body),{headers: {
       'Content-Type': 'application/json',
       }});
+      return {user: res.data.foundUser,encodedToken: res.data.encodedToken};
+
     } catch(error) {
-      return thunkAPI.rejectWithValue(error);
+      return rejectWithValue(error);
     }
 })
 

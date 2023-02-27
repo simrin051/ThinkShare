@@ -44,6 +44,7 @@ export const getUserHandler = function (schema, request) {
 
 export const editUserHandler = function (schema, request) {
   let user = requiresAuth.call(this, request);
+  console.log(" edit user data "+JSON.stringify(user));
   try {
     if (!user) {
       return new Response(
@@ -56,7 +57,9 @@ export const editUserHandler = function (schema, request) {
         }
       );
     }
+    console.log(" request request body "+JSON.stringify(request.requestBody));
     const { userData } = JSON.parse(request.requestBody);
+    console.log(" user data "+JSON.stringify(userData));
     user = { ...user, ...userData, updatedAt: formatDate() };
     this.db.users.update({ _id: user._id }, user);
     return new Response(201, {}, { user });

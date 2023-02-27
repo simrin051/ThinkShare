@@ -47,7 +47,7 @@ export const LoginDialog = ({ openLoginDialog, setOpenLoginDialog }) => {
       payload: INCORRECT_LOGIN_CREDENTIALS
     })
     }
-  })
+  }) 
   }
 
   const loginGuestAccount = async () => {
