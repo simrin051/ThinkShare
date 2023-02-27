@@ -65,6 +65,7 @@ const postButtonClicked = async () => {
         content: formState.content
     }
     dispatch(createPost(postData));
+    formDispatch({ type: SET_CONTENT, payload: "" })
     setPostContentLength(0);
 }
 
@@ -79,9 +80,8 @@ const setTextCalculateProgress = (e) => {
             <div class="option color-yellow"><i class="fa-solid fa-star-of-life" onClick={()=>sortPostsBasedOnUpdatedTime()}></i>See latest broadcasts</div>
         </div>}
         { isOpen==false && <i  class="fa-solid fa-bars menu-icon" onClick={()=>{setIsOpen(true)}}></i>}
-        <img  class="image-container" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg"/>
-                    
-        <textarea class="postmodal-text-area" maxLength={postMaxLength} placeholder="What's happening" onChange={e=>setTextCalculateProgress(e)}>
+        <img  class="image-container" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg"/>          
+        <textarea class="postmodal-text-area" value={formState.content} maxLength={postMaxLength} placeholder="What's happening" onChange={e=>setTextCalculateProgress(e)}>
         </textarea>
         <div class="actions-footer">
         {postContentLength>0 && (postMaxLength - postContentLength > 10) ? (
