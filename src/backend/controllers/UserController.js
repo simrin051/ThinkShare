@@ -200,9 +200,32 @@ export const removePostFromBookmarkHandler = function (schema, request) {
 
 /**
  * This handler handles follow action.
+ * send GET Request at /api/users/unfollowed/:username/
+ * */
+export const getUnFollowedUserHandler = function (schema, request) {
+  const { username } = request.params;
+  console.log(" username "+username);
+  const user = schema.users.findBy({ username }).attrs;
+  console.log( " user followers "+user.following.length);
+  const users = this.db.users;
+  let unfollowedUsers;
+  if(user.following.length==0)
+    unfollowedUsers = users.filter(unFollowedUser=>unFollowedUser.username!=user.username);
+  else {
+    unfollowedUsers = users
+    .filter(function(e1) {
+      return e1.username!=user.username && !user.following.find(e2=>{
+        return e2._id === e1._id  
+      })
+    })
+  }
+  return new Response(200, {}, { unfollowedUsers: unfollowedUsers.slice(0,3)});
+}
+
+/**
+ * This handler handles follow action.
  * send POST Request at /api/users/follow/:followUserId/
  * */
-
 export const followUserHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
   const { followUserId } = request.params;
@@ -222,7 +245,7 @@ export const followUserHandler = function (schema, request) {
     const isFollowing = user.following.some(
       (currUser) => currUser._id === followUser._id
     );
-
+     console.log(" is following "+isFollowing); 
     if (isFollowing) {
       return new Response(400, {}, { errors: ["User Already following"] });
     }
@@ -323,3 +346,4 @@ export const unfollowUserHandler = function (schema, request) {
     );
   }
 };
+

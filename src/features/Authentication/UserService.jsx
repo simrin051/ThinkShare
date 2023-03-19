@@ -45,7 +45,7 @@ export const updateUser = createAsyncThunk("user/updateUser",async (userData,thu
 
 export const updateFollower = createAsyncThunk("user/updateFollower",async (followUserId,thunkAPI)=>{
   try {
-    await axios.get(`/api/users/follow/${followUserId}/`,{headers: {
+    await axios.post(`/api/users/follow/${followUserId}/`,{headers: {
       'Content-Type': 'application/json',
       }})
       .then(res=>{
@@ -57,3 +57,17 @@ export const updateFollower = createAsyncThunk("user/updateFollower",async (foll
       return thunkAPI.rejectWithValue(err.statusText);
     }
 })
+
+export const getUnFollowedUsers = async(username) => {
+  try {
+    let unFollowersData;
+     await axios.get(`/api/users/unfollowed/${username}`,{headers: {
+      'Content-Type': 'application/json',
+      }}).then(res=>{
+        unFollowersData = res.data.unfollowedUsers;
+      })
+      return unFollowersData;
+    } catch(err) {
+      return err;
+    }
+}

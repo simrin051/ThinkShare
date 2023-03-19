@@ -32,7 +32,9 @@ import {
   removePostFromBookmarkHandler,
   unfollowUserHandler,
   editUserHandler,
+  getUnFollowedUserHandler,
 } from "./backend/controllers/UserController";
+import { getUnFollowedUsers } from "./features/Authentication/UserService";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -116,6 +118,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
       );
+      this.get("/users/unfollowed/:username/",getUnFollowedUserHandler.bind(this));
     },
   });
 }

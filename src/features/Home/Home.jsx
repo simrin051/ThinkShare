@@ -2,7 +2,7 @@
 import { useDispatch } from 'react-redux';
 import { getCookie } from '../../utils/AuthCookies';
 import { userNameKey } from '../../utils/constants';
-import { getBookMarks, getUser } from '../Authentication/UserService';
+import { getBookMarks, getUnFollowedUsers, getUser } from '../Authentication/UserService';
 import { FollowRequests } from '../FollowRequests/FollowRequests';
 import { NavBar } from '../NavBar/NavBar';
 import { PostFeed } from '../PostFeed/PostFeed';

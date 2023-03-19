@@ -35,8 +35,8 @@ export const Profile = () => {
             <div class="userbio">{user?.bio? user?.bio:""}</div>
             {user?.portfolioUrl && <div class="userbiolink"><i class="fa-solid fa-link"></i><a href="https://leetcode.com/Simrin_Joshi/">{user?.portfolioUrl}</a></div>}
             <div class="profile-follow-container">
-                <div class="userfollowers">0 Followers</div>
-                <div class="userfollowing">0 Following</div>
+                <div class="userfollowers">{user.followers.length} Followers</div>
+                <div class="userfollowing">{user.following.length} Following</div>
             </div>
         </div>       
     </div>}

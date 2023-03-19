@@ -1,13 +1,40 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUnFollowedUsers, updateFollower } from '../Authentication/UserService';
 import './FollowRequests.css';
 export const FollowRequests = () => {
-    return(
+    const user = useSelector((state) => {return state.auth.user})
+    const dispatch = useDispatch();
+    const [unFollowersData, setunFollowersData] = useState([]);
+
+    useEffect(() => {
+        //(async () => {
+            getUnFollowedUsers("simrin").then(res=>{
+                console.log("inside get unfollowed users ")
+                setunFollowersData(res);
+            })
+      //  })();
+      }, [user]);
+
+      const updateUserFollower = async(id) => {
+        await dispatch(updateFollower(id));
+      }
+
+      return(
         <div class="follow-container">
-            <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg"></img>
-            <div class="text-container">
-                <div class="username">Malvika Iyer</div>
-                <div class="handle">@Malvika Iyer</div>
-            </div>
-            <button class="follow-btn">Follow</button>
+            {unFollowersData?.length>0 && unFollowersData?.map(user=> {
+                return(
+                    <div>
+                    <img class="image-container postmodal-image" src={user.profilePhoto}></img>
+                    <div class="text-container">
+                        <div class="username">{user.firstName} {user.lastName}</div>
+                        <div class="handle">@{user.firstName} {user.lastName}</div>
+                    </div>
+                    <button class="follow-btn" onClick={()=>updateUserFollower(user._id)}>Follow</button>
+                    </div>
+                )
+            })
+    }    
         </div>
     )
 }

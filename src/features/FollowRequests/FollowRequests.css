@@ -1,6 +1,6 @@
 .follow-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border-left:  solid #D3D3D3;
     border-width: thin;
 }
