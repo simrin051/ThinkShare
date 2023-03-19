@@ -24,7 +24,7 @@ export const FollowRequests = () => {
         <div class="follow-container">
             {unFollowersData?.length>0 && unFollowersData?.map(user=> {
                 return(
-                    <div>
+                    <div class="container">
                     <img class="image-container postmodal-image" src={user.profilePhoto}></img>
                     <div class="text-container">
                         <div class="username">{user.firstName} {user.lastName}</div>
