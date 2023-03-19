@@ -3,18 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUnFollowedUsers, updateFollower } from '../Authentication/UserService';
 import './FollowRequests.css';
 export const FollowRequests = () => {
-    const user = useSelector((state) => {return state.auth.user})
+    const userData = useSelector((state) => {return state.auth.user})
     const dispatch = useDispatch();
     const [unFollowersData, setunFollowersData] = useState([]);
 
     useEffect(() => {
         //(async () => {
-            getUnFollowedUsers("simrin").then(res=>{
+          
+            getUnFollowedUsers(userData.payload.user.username).then(res=>{
                 console.log("inside get unfollowed users ")
                 setunFollowersData(res);
             })
       //  })();
-      }, [user]);
+      }, [userData]);
 
       const updateUserFollower = async(id) => {
         await dispatch(updateFollower(id));
@@ -22,6 +23,7 @@ export const FollowRequests = () => {
 
       return(
         <div class="follow-container">
+            <h2 class="follow-container-heading">Who To Follow</h2>
             {unFollowersData?.length>0 && unFollowersData?.map(user=> {
                 return(
                     <div class="container">
