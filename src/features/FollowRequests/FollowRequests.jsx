@@ -8,13 +8,14 @@ export const FollowRequests = () => {
     const [unFollowersData, setunFollowersData] = useState([]);
 
     useEffect(() => {
-        //(async () => {
-          
-            getUnFollowedUsers(userData.payload.user.username).then(res=>{
-                console.log("inside get unfollowed users ")
-                setunFollowersData(res);
-            })
-      //  })();
+        if(userData && userData.payload) {
+            if(userData.payload.user) {
+                console.log(userData.payload.user.username);
+                getUnFollowedUsers(userData.payload.user.username).then(res=>{
+                    setunFollowersData(res);
+                }) 
+            }
+        }
       }, [userData]);
 
       const updateUserFollower = async(id) => {

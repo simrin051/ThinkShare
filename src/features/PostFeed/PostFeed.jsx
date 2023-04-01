@@ -1,14 +1,12 @@
+import { CircularProgress } from '@chakra-ui/react';
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Post } from './Post';
-import { ACTIONS } from '../posts/reducer/createPostFormReducer';
-import './PostFeed.css';
-import { setPosts } from './postSlice';
-import { postsReducer } from '../posts/reducer/createPostFormReducer';
-import { initialStateOfPostForm } from '../posts/reducer/createPostFormReducer';
-import { createPost } from './PostService';
 import { CircularProgressWithLabel } from '../../app/components/CircularProgressWithLabel';
-import { CircularProgress } from '@chakra-ui/react';
+import { ACTIONS, initialStateOfPostForm, postsReducer } from '../posts/reducer/createPostFormReducer';
+import { Post } from './Post';
+import './PostFeed.css';
+import { createPost } from './PostService';
+import { setPosts } from './postSlice';
 
 
 export const PostFeed = () => {
@@ -100,6 +98,6 @@ const setTextCalculateProgress = (e) => {
         {posts && posts.length>0 && posts.map((post) => {
             return <Post postData={post} />;
         })}
-        </div>
+        </div>       
     </div>)
 }
