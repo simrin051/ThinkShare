@@ -4,18 +4,19 @@ import {
   ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,
   useDisclosure
 } from '@chakra-ui/react';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPostComment } from './CommentService';
 import './Modal.css';
-import { setPosts } from './postSlice';
 import { getPosts } from './PostService';
 
 export const CommentModal = ({ postData, setCommentModal }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
+  const {username,createdAt,content} = postData;
+  
   const [comment, setComment] = useState("");
-
   let posts = useSelector((state) => {
     return state.post.posts;
 })
@@ -29,6 +30,7 @@ export const CommentModal = ({ postData, setCommentModal }) => {
     onClose();
   }
 
+
   return (
     <Modal isOpen="true" onClose={closeModal}>
       <ModalOverlay />
@@ -39,9 +41,10 @@ export const CommentModal = ({ postData, setCommentModal }) => {
           <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
           <div class="v-line"></div>
           <div class="comment-post">
-            <span class="username">username posttime</span>
+          
+            <span class="username">{username} {format(new Date(createdAt), 'MMMM dd')}</span>
             <div class="postContent">
-              DEF
+              {content}
             </div>
           </div>
           <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
