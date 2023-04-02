@@ -1,56 +1,73 @@
 import {
-  Button, Modal, ModalBody,
-  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useDisclosure
+  Button,
+  Modal, ModalBody,
+  ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,
+  useDisclosure
 } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addPostComment } from './CommentService';
 import './Modal.css';
+import { setPosts } from './postSlice';
+import { getPosts } from './PostService';
 
-let comment = "";
-
-const setComment = (e) => {
-  comment = e.target.value;
-}
-
-
-export const CommentModal = ({postData,setCommentModal}) => {
+export const CommentModal = ({ postData, setCommentModal }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
-  const postComment = (id) => {
-    dispatch(addPostComment(id,comment))
+  const [comment, setComment] = useState("");
+
+  let posts = useSelector((state) => {
+    return state.post.posts;
+})
+  const postComment = (comment, id) => {
+    dispatch(addPostComment({id, comment}));
+    dispatch(getPosts());
   }
 
   const closeModal = () => {
     setCommentModal(false);
     onClose();
   }
-  
-    return(
-        <Modal isOpen="true" onClose={closeModal}>
-        <ModalOverlay />
-        <ModalContent>
-            <ModalHeader></ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <div class="postedUsername">
-                {postData.username}
-              </div>
-              <div class="post">
-                    {postData.content}  
-              </div>
-              <div class="reply">
-              <h2>Replying</h2>
-           
-        <Textarea onChange={(e)=>setComment(e,postData._id)}/>  
-            <div class="comment-btns">
-                <Button colorScheme='blue' onClick={()=>postComment(postData._id)}>Post</Button>
-                <Button colorScheme='blue' onClick={()=>closeModal()}>Cancel</Button>
+
+  return (
+    <Modal isOpen="true" onClose={closeModal}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader></ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
+          <div class="v-line"></div>
+          <div class="comment-post">
+            <span class="username">username posttime</span>
+            <div class="postContent">
+              DEF
             </div>
-              </div>
-            </ModalBody>
-            <ModalFooter>               
-            </ModalFooter>
-        </ModalContent>
+          </div>
+          <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
+          <div class="comment-post">
+            <textarea class="textarea-comment" placeholder="What's happening" onChange={(e) => setComment(e.target.value)}>
+            </textarea>
+          </div>
+          <div class="reply-container-footer"></div>
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme='blue' disabled={comment.length==0} onClick={() => postComment(comment, postData._id)}>Post</Button>
+          {/**
+          <Box as="button"
+            disabled
+            fontWeight="semibold"
+            py={2}
+            px={4}
+            rounded="md"
+            color="white"
+            bg="blue.500"
+            _active={{ bg: "blue.700" }}
+            _focus={{ boxShadow: "outline" }}
+            _disabled={{ opacity: 0.6 }}>Reply</Box>
+        **/}
+        </ModalFooter>
+      </ModalContent>
     </Modal>
-    )
+  )
 }

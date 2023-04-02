@@ -8,3 +8,37 @@
 .chakra-modal__body .chakra-textarea{
     height: 30rem;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-post {
+    width: 100%;
+    min-height: 10rem;
+    display: flex;
+    flex-direction: column;
+    padding-left: 7rem;
+}
+
+.v-line {
+    background-color: var(--border-color);
+    width: 3px;
+    top: 8rem;
+    height: 4rem;
+    margin-left: 2.5rem;
+    z-index: 1;
+    position: absolute;
+}
+
+.reply-container-footer {
+    border-bottom: thin solid #D3D3D3;
+    width: 80%;
+    float: right;
+}
+
+.textarea-comment {
+    resize: none;
+    border: none;
+}

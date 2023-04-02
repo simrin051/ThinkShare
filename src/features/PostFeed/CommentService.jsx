@@ -2,17 +2,19 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCookie} from "../../utils/AuthCookies";
 import { tokenKey } from "../../utils/constants";
+import { setPosts } from "./postSlice";
 
 export const addPostComment = createAsyncThunk(
-    'postComment/addComment',async(postId,postComment,thunkAPI)=> {   
-        console.log(" inside add post comment ");
+    'postComment/addComment',async({id,comment},thunkAPI)=> {   
         try {
-            await axios.post(`/api/comments/add/${postId}`,{commentData:{text:postComment}},{headers: {
+            await axios.post(`/api/comments/add/${id}`,{commentData:{text:comment}},{headers: {
                   'Content-Type': 'application/json',
                    'authorization': getCookie(tokenKey)
-                  }}).then((res)=>{})
+                  }}).then((result)=>{
+                    
+                  })
           } catch (err) {
-            console.log(err);
               thunkAPI.rejectWithValue(err);
           }
-})
+      
+  })

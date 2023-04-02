@@ -11,7 +11,7 @@
     height: 6rem;
 }
 
-.postContent {
+.post .postContent {
     margin-left: 7rem;
     margin-right: 2rem;
 }
@@ -54,5 +54,5 @@
 
 .post-menu-icon-container .post-menu-icon {
     color :	#808080; 
-    
 }
+
