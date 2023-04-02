@@ -29,7 +29,7 @@ export const PostFeed = () => {
     })
 
     useEffect(() => {
-        /*
+    
         const handleClickOutside = (event) => {
             if (ref && ref.current && !ref.current.contains(event.target)) {
                 setIsOpen(false);
@@ -37,10 +37,8 @@ export const PostFeed = () => {
           };
           document.addEventListener("mousedown", handleClickOutside);
           sortPostsBasedOnUpdatedTime();
-          }, [ref]);
-          */
-    }, [posts]);
-
+        }, [ref]);
+    
     const sortPostsBasedOnLikes = () => {
         posts = [...posts].sort((a, b) => {
             return b.likes.likeCount - a.likes.likeCount;
