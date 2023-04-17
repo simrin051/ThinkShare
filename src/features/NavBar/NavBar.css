@@ -134,3 +134,20 @@
     border-bottom: solid #D3D3D3;
     border-width: thin;
 }
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+
+    .navbar-container {
+        background-color: green;
+    }
+
+    body {
+        background-color: red;
+    }
+    .sidebar-nav-links {       
+       text-align: center;
+    }
+}

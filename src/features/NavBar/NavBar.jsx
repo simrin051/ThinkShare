@@ -61,13 +61,22 @@ export const NavBar = () => {
 
     return (<div class="navbar-container">
         <div class="logo"><img src={logo} class="logo-icon" /></div>
+        {/** iPad **/}
+        <ul class="sidebar-nav-links">
+            <Link to="/home"><li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-house"></i></li></Link>
+            <Link to="/explore"><li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-hashtag"></i></li></Link>
+            <Link to="/bookmarks"><li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-bookmark"></i></li></Link>
+            <Link to="/profile"><li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i></li></Link>
+        </ul>   
+        {/** Laptop
         <ul class="sidebar-nav-links">
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-house"></i><Link to="/home">Home</Link></li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-hashtag"></i><Link to="/explore">Explore</Link></li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-bookmark"></i><Link to="/bookmarks">Bookmarks</Link></li>
             <li class="sidebar-nav-link"><i class="sidebar-nav-icon fa-solid fa-user"></i><Link to="/profile">Profile</Link></li>
         </ul>
-        <button class="navbar-btn" onClick={openPostModal}>Think & Share</button>
+         <button class="navbar-btn" onClick={openPostModal}>Think & Share</button>
+        **/}
         <div class="nav-footer">
             <div class="user-container">
                 <img class="image-container postmodal-image" src="https://res.cloudinary.com/diirhxtse/image/upload/v1657112052/ThinkShare/Malvika_Iyer.jpg" />
