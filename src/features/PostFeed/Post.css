@@ -32,7 +32,21 @@
 .post-icons i {
     padding-bottom: 1rem;
     font-size: larger;
-    color :	#808080; 
+    width: 40px;
+    min-width: 40px;
+    text-indent: 0; 
+    border: 1px solid white;
+    font-family: 'FontAwesome';
+    display: inline-block;
+    width: 40px;
+    min-width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    text-indent: 0;
+    color :	#808080;   
 }
 
 .post-menu-icon-container  {
@@ -56,3 +70,6 @@
     color :	#808080; 
 }
 
+.fa-regular{
+    margin-right : 5px;
+}
